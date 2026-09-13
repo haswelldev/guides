@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Antharas Run Sheet</title>
-<meta name="description" content="An optimized 18-stop route for the Lineage 2 quest Audience with the Land Dragon, field-tested on L2Reborn Signature.">
+<meta name="description" content="A faster route for the Lineage 2 quest Audience with the Land Dragon. 18 stops, tested on L2Reborn Signature.">
 <meta property="og:title" content="Antharas Run Sheet">
-<meta property="og:description" content="Audience with the Land Dragon, reordered so you walk it once.">
+<meta property="og:description" content="Audience with the Land Dragon, in a better order.">
 <meta property="og:type" content="article">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%90%89</text></svg>">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
@@ -251,6 +251,21 @@
   ul.plain{margin:0;padding-left:1.1em;color:var(--ink-soft);font-size:.92rem;display:flex;flex-direction:column;gap:5px;max-width:66ch}
   ul.plain li::marker{color:var(--bronze)}
 
+
+  /* ---------- theme switch ---------- */
+  .topbar{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+  .themer{display:flex;border:1px solid var(--line-strong);border-radius:3px;overflow:hidden;background:var(--panel)}
+  .themer button{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;font-size:.68rem;letter-spacing:.1em;
+    text-transform:uppercase;font-weight:600;
+    background:none;border:0;border-right:1px solid var(--line);color:var(--ink-faint);
+    padding:5px 10px;cursor:pointer;line-height:1.4;
+  }
+  .themer button:last-child{border-right:0}
+  .themer button:hover{color:var(--ink)}
+  .themer button[aria-pressed="true"]{background:var(--bronze);color:var(--panel)}
+  .themer button:focus-visible{outline:2px solid var(--bronze);outline-offset:-2px}
+
   @media (max-width:640px){
     .thesis{grid-template-columns:1fr;gap:18px}
     .stop{grid-template-columns:26px 22px 1fr;gap:0 10px}
@@ -260,53 +275,70 @@
   @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
 </style>
 
+<script>
+(function(){
+  var r = document.documentElement;
+  window.__hostTheme = r.getAttribute("data-theme");
+  try {
+    var c = localStorage.getItem("l2guides-theme-v1");
+    if (c === "light" || c === "dark") r.setAttribute("data-theme", c);
+  } catch (e) {}
+})();
+</script>
 <div class="wrap">
 
   <header>
-    <span class="eyebrow">Quest 337 &middot; Route optimization</span>
+    <div class="topbar">
+      <span class="eyebrow">Quest 337 &middot; Faster route</span>
+      <div class="themer" role="group" aria-label="Colour theme">
+        <button type="button" data-theme-set="auto" aria-pressed="true">Auto</button>
+        <button type="button" data-theme-set="light" aria-pressed="false">Light</button>
+        <button type="button" data-theme-set="dark" aria-pressed="false">Dark</button>
+      </div>
+    </div>
     <h1>Antharas Run Sheet
-      <span class="sub">Audience with the Land Dragon, reordered so you walk it once</span>
+      <span class="sub">Audience with the Land Dragon, in a better order</span>
     </h1>
     <dl class="facts">
       <div class="fact"><dt>Level</dt><dd>50+</dd></div>
       <div class="fact"><dt>Start</dt><dd>Gabrielle, Giran</dd></div>
       <div class="fact"><dt>Reward</dt><dd>Portal Stone &times;1</dd></div>
-      <div class="fact"><dt>Repeatable</dt><dd>Yes &mdash; one stone per run</dd></div>
+      <div class="fact"><dt>Repeatable</dt><dd>Yes &mdash; 1 stone per run</dd></div>
       <div class="fact"><dt>Tested on</dt><dd>L2Reborn Signature</dd></div>
     </dl>
   </header>
 
   <div class="thesis">
-    <p>The standard walkthrough ping-pongs: talk to a watchman, fly out, farm one drop, fly back, repeat &mdash; four times over. <strong>This route farms everything first in one Aden-hub circuit, then pays out the marks in geographic order.</strong> Same quest, same items, half the town trips.</p>
+    <p>The normal guide sends you back and forth: talk to an NPC, fly out, kill one mob, fly back. Four times. <strong>This route kills everything first, in one circle around Aden. Then you give all the items in one trip.</strong> Same quest, much less flying.</p>
     <div class="count">
-      <span><span class="n old">26</span><span class="lbl">standard steps</span></span>
+      <span><span class="n old">26</span><span class="lbl">normal guide</span></span>
       <span><span class="n new">18</span><span class="lbl">stops here</span></span>
     </div>
   </div>
 
   <div class="callout info">
-    <h3>Walked and verified on L2Reborn Signature</h3>
-    <p>The reordering works because drops register while the quest is simply <em>active</em> &mdash; you do not need to have spoken to the watchman who wants an item before the item will drop. That is what lets the whole farm circuit happen up front, and it is confirmed in-game here.</p>
+    <h3>Tested on L2Reborn Signature</h3>
+    <p>You can farm the items <em>before</em> you talk to the NPC who asks for them. The quest only needs to be started. This is why the whole farm part can be done first.</p>
   </div>
 
   <div class="callout info">
-    <h3>Bring at least three</h3>
-    <p>Run this in a group of three or more &mdash; solo is possible and thoroughly annoying. Credit is per character, so everyone needs their own copy of every item, but how much that costs the group depends on the step. <strong>Ordinary mobs are roughly one kill per person:</strong> six people want the Marsh Stalker Horn, six Marsh Stalkers die. <strong>The spawner steps are where a group pays off</strong> &mdash; one trigger drops several quest mobs at once, so several people collect in parallel. Each hunting step below says which kind it is.</p>
+    <h3>Bring 3 people or more</h3>
+    <p>Solo works, but it is slow and boring. Everyone needs their own items. <strong>Normal mobs: about 1 mob per person.</strong> Example: 6 people want the Marsh Stalker Horn, so you kill 6 Marsh Stalkers. <strong>Spawn mobs are better for a group</strong> &mdash; one pull spawns several quest mobs, so several people get the item at the same time. Every hunt step below says which type it is.</p>
   </div>
 
   <section>
     <div class="section-head">
-      <h2>Before you undock</h2>
-      <p>Both of these shape the route below.</p>
+      <h2>Before you start</h2>
+      <p>Two things that change the route.</p>
     </div>
     <div class="prep">
       <div>
-        <h3>Up to 7&times; Scroll of Escape</h3>
-        <p>One out of each farm zone. Most return you to Aden; the one from Forest of Mirrors drops you in Hunters Village &mdash; which is why that leg runs last. Without noblesse you burn one fewer: Giant's Cave is reached on foot from Forsaken Plains.</p>
+        <h3>Up to 7 SoE</h3>
+        <p>One to leave each farm zone. Most of them bring you to Aden. The one from Forest of Mirrors brings you to Hunters Village &mdash; that is why this zone is last. Without noblesse you use one less, because you run to Giant's Cave on foot.</p>
       </div>
       <div>
-        <h3>Noblesse shortcut</h3>
-        <p>If you are noble, take the Anghel Waterfall port out of Aden instead of the Forest of Mirrors gatekeeper run &mdash; it lands you noticeably closer to the Harit camps.</p>
+        <h3>Noblesse port</h3>
+        <p>With noblesse, use the Anghel Waterfall port from Aden. It puts you next to the Harit camps, much closer than the normal Forest of Mirrors port.</p>
       </div>
     </div>
   </section>
@@ -314,7 +346,7 @@
   <section>
     <div class="section-head">
       <h2>The route</h2>
-      <p>Eighteen stops, in order. Tick them as you go &mdash; progress is kept in this browser.</p>
+      <p>18 stops, in this order. Click the boxes as you go &mdash; your progress is saved in this browser.</p>
     </div>
 
     <div class="tracker">
@@ -326,28 +358,29 @@
     <div id="route">
 
       <div class="phase">
-        <div class="phase-head"><span class="tag">Phase 0 &mdash; Open the quest</span></div>
+        <div class="phase-head"><span class="tag">Phase 0 &mdash; Start the quest</span></div>
         <div class="stop">
           <span class="idx">01</span>
           <input type="checkbox" id="s1" aria-labelledby="s1l">
           <div class="body">
             <div class="line1"><span class="where" id="s1l">Giran, town square</span><span class="who">Gabrielle</span><span class="act talk">Talk</span></div>
-            <p>Accept the quest. This one conversation is what arms every drop below.</p>
+            <p>Take the quest. After this talk, all quest items below can drop.</p>
             <div class="loot"><span class="chip get">Feather of Gabrielle</span></div>
           </div>
         </div>
       </div>
 
       <div class="phase">
-        <div class="phase-head"><span class="tag">Phase 1 &mdash; The Aden farm circuit</span><span class="note">four legs out and back, no NPC in between</span></div>
+        <div class="phase-head"><span class="tag">Phase 1 &mdash; Farm circle from Aden</span><span class="note">four trips out and back, no NPC in between</span></div>
 
         <div class="stop">
           <span class="idx">02</span>
           <input type="checkbox" id="s2" aria-labelledby="s2l">
           <div class="body">
-            <div class="line1"><span class="where" id="s2l">Forsaken Plains</span><span class="who">via Aden gatekeeper</span><span class="act hunt">Hunt</span></div>
-            <p>Two mobs, two drops, one trip. Plain drops, so this leg scales with headcount: one Marsh Drake and one Marsh Stalker per person, killed until everybody has the pair. <strong>Noblesse:</strong> SoE back to Aden. <strong>No noblesse:</strong> do not scroll out &mdash; Giant's Cave is a short run from here and the next stop is on foot.</p>
-            <div class="loot"><span class="chip get">Marsh Drake Talons &times;1</span><span class="chip get">Marsh Stalker Horn &times;1</span><span class="chip grp">one kill per person, per item</span></div>
+            <div class="line1"><span class="where" id="s2l">Forsaken Plains</span><span class="who">Aden gatekeeper</span><span class="act hunt">Hunt</span></div>
+            <p>Kill Marsh Drake and Marsh Stalker. They walk in the same area, so kill what you see. Normal drops: 1 mob per person for each item.</p>
+            <p><strong>With noblesse:</strong> SoE to Aden. <strong>Without noblesse:</strong> do not SoE &mdash; run to Giant's Cave from here.</p>
+            <div class="loot"><span class="chip get">Marsh Drake Talons &times;1</span><span class="chip get">Marsh Stalker Horn &times;1</span><span class="chip grp">1 mob per person</span></div>
           </div>
         </div>
 
@@ -355,9 +388,10 @@
           <span class="idx">03</span>
           <input type="checkbox" id="s3" aria-labelledby="s3l">
           <div class="body">
-            <div class="line1"><span class="where" id="s3l">Giant's Cave</span><span class="who">via Aden gatekeeper</span><span class="act hunt">Hunt</span></div>
-            <p>Two ways in, and they are not equal. <strong>Noblesse:</strong> SoE to Aden and take the noble port straight to the cave entrance. <strong>No noblesse:</strong> skip Aden entirely and run overland from Forsaken Plains &mdash; it is close, and a gatekeeper detour costs more than the run. Hamrut and Kranrot both sit in the outer halls; no need to push deep. Plain drops again &mdash; one of each per person. SoE back to Aden afterwards.</p>
-            <div class="loot"><span class="chip get">Hamrut Leg &times;1</span><span class="chip get">Kranrot Skin &times;1</span><span class="chip grp">one kill per person, per item</span></div>
+            <div class="line1"><span class="where" id="s3l">Giant's Cave</span><span class="who">Hamrut &amp; Kranrot</span><span class="act hunt">Hunt</span></div>
+            <p><strong>With noblesse:</strong> SoE to Aden, then noble port to the cave. <strong>Without noblesse:</strong> run here from Forsaken Plains, it is close &mdash; faster than going back to town.</p>
+            <p>Both mobs are in the first halls, you do not need to go deep. Normal drops again: 1 mob per person for each item. SoE to Aden after.</p>
+            <div class="loot"><span class="chip get">Hamrut Leg &times;1</span><span class="chip get">Kranrot Skin &times;1</span><span class="chip grp">1 mob per person</span></div>
           </div>
         </div>
 
@@ -365,9 +399,9 @@
           <span class="idx">04</span>
           <input type="checkbox" id="s4" aria-labelledby="s4l">
           <div class="body">
-            <div class="line1"><span class="where" id="s4l">Seal of Shilen</span><span class="who">Forbidden Gateway, east of Aden</span><span class="act hunt">Hunt</span></div>
-            <p>Kill Blood Queens until one spawns <strong>Sacrifice of the Sacrificed</strong> &mdash; and it spawns them in quantity, enough to cover a whole party off a single trigger. The cheapest step on the sheet for a group. SoE back to Aden.</p>
-            <div class="loot"><span class="chip get">Remains of Sacrifice &times;1</span><span class="chip grp">one trigger covers the party</span></div>
+            <div class="line1"><span class="where" id="s4l">Seal of Shilen</span><span class="who">east of Aden</span><span class="act hunt">Hunt</span></div>
+            <p>Kill Blood Queens until one spawns <strong>Sacrifice of the Sacrificed</strong>. It spawns many of them &mdash; one pull is enough for the whole party. This is the fastest step for a group. SoE to Aden.</p>
+            <div class="loot"><span class="chip get">Remains of Sacrifice &times;1</span><span class="chip grp">1 pull = whole party</span></div>
           </div>
         </div>
 
@@ -376,21 +410,23 @@
           <input type="checkbox" id="s5" aria-labelledby="s5l">
           <div class="body">
             <div class="line1"><span class="where" id="s5l">Forest of Mirrors</span><span class="who">Harit Lizardman camps</span><span class="act hunt">Hunt</span></div>
-            <p><strong>Noblesse:</strong> take the Anghel Waterfall port out of Aden &mdash; the Harit camps are right at the landing point. <strong>No noblesse:</strong> gatekeeper to Forest of Mirrors and run in from the port. Kill Matriarchs and Shamans to trigger <strong>Harit Lizardman Zealots</strong> &mdash; three per spawn, so three people collect at a time. The efficient shape here is to break the group into cells of one DD and two supports and work separate camps in parallel, rather than stacking everyone on one pull. Run this leg last on purpose: the SoE out of here lands in Hunters Village, which is the next stop.</p>
-            <div class="loot"><span class="chip get">Totem of Land Dragon &times;1</span><span class="chip grp">3 collectors per spawn</span></div>
+            <p><strong>With noblesse:</strong> Anghel Waterfall port from Aden &mdash; the camps are right there. <strong>Without noblesse:</strong> gatekeeper to Forest of Mirrors, then run in.</p>
+            <p>Kill Matriarch and Shaman to spawn <strong>Harit Lizardman Zealots</strong>. Each spawn gives 3, so 3 people get the totem at the same time. Best way for a group: split into small teams of 1 DD + 2 supports and pull different camps.</p>
+            <p>Do this zone last: SoE from here brings you to Hunters Village, which is the next stop.</p>
+            <div class="loot"><span class="chip get">Totem of Land Dragon &times;1</span><span class="chip grp">3 people per spawn</span></div>
           </div>
         </div>
       </div>
 
       <div class="phase">
-        <div class="phase-head"><span class="tag">Phase 2 &mdash; Collect four marks</span><span class="note">Hunters Village &rarr; Ivory Tower &rarr; Aden &rarr; Giran, one direction</span></div>
+        <div class="phase-head"><span class="tag">Phase 2 &mdash; Get 4 marks</span><span class="note">Hunters Village &rarr; Ivory Tower &rarr; Aden &rarr; Giran</span></div>
 
         <div class="stop">
           <span class="idx">06</span>
           <input type="checkbox" id="s6" aria-labelledby="s6l">
           <div class="body">
             <div class="line1"><span class="where" id="s6l">Hunters Village, Orc Guild</span><span class="who">Prefect Chakiris</span><span class="act talk">Talk</span></div>
-            <p>Hand over the Giant's Cave pair.</p>
+            <p>Give him the two Giant's Cave items.</p>
             <div class="loot"><span class="chip give">Hamrut Leg</span><span class="chip give">Kranrot Skin</span><span class="chip get">Mark of Watchman</span></div>
           </div>
         </div>
@@ -400,7 +436,7 @@
           <input type="checkbox" id="s7" aria-labelledby="s7l">
           <div class="body">
             <div class="line1"><span class="where" id="s7l">Ivory Tower, 4th floor</span><span class="who">Magister Kaiena</span><span class="act talk">Talk</span></div>
-            <p>Gatekeeper straight from Hunters Village. Kaiena is up the stairs, not on the entrance floor.</p>
+            <p>Gatekeeper from Hunters Village. She is on the 4th floor, not on the entrance floor.</p>
             <div class="loot"><span class="chip give">Marsh Drake Talons</span><span class="chip give">Marsh Stalker Horn</span><span class="chip get">Mark of Watchman</span></div>
           </div>
         </div>
@@ -419,7 +455,7 @@
           <input type="checkbox" id="s9" aria-labelledby="s9l">
           <div class="body">
             <div class="line1"><span class="where" id="s9l">Aden, Warrior Guild</span><span class="who">Master Kendra</span><span class="act talk">Talk</span></div>
-            <p>Same town as Orven &mdash; walk it, do not port.</p>
+            <p>Same town as Orven &mdash; just walk, do not use the gatekeeper.</p>
             <div class="loot"><span class="chip give">Totem of Land Dragon</span><span class="chip get">Mark of Watchman</span></div>
           </div>
         </div>
@@ -429,22 +465,25 @@
           <input type="checkbox" id="s10" aria-labelledby="s10l">
           <div class="body">
             <div class="line1"><span class="where" id="s10l">Giran, town square</span><span class="who">Gabrielle</span><span class="act talk">Talk</span></div>
-            <p>All four marks in one conversation. She sends you after the abyss jewels.</p>
+            <p>Give all 4 marks in one talk. She sends you to the abyss jewels.</p>
             <div class="loot"><span class="chip give">Mark of Watchman &times;4</span></div>
           </div>
         </div>
       </div>
 
       <div class="phase">
-        <div class="phase-head"><span class="tag">Phase 3 &mdash; The two jewels</span><span class="note">farm first, then the NPC standing in the same town</span></div>
+        <div class="phase-head"><span class="tag">Phase 3 &mdash; Two jewels</span><span class="note">kill first, then talk to the NPC in the same town</span></div>
 
         <div class="stop">
           <span class="idx">11</span>
           <input type="checkbox" id="s11" aria-labelledby="s11l">
           <div class="body">
-            <div class="line1"><span class="where" id="s11l">Windy Hill</span><span class="who">out of Gludin Village</span><span class="act hunt">Hunt</span></div>
-            <p>The jewel is not a kill, it is a switch. Beat it <strong>below 50% HP</strong>; from then on a single hit hands the fragment to whoever landed it &mdash; supports and buffers walk up and punch it bare-handed for their own copy, no damage contribution needed. Get the whole party tapping it at once; that is the fastest fragment on the sheet. The jewel also throws out <strong>Jewel Guardian Mara</strong> in numbers, so there are fangs enough to go round, but they are ordinary kills: nine collectors means at least nine guardians down. SoE back to Gludin.</p>
-            <div class="loot"><span class="chip get">1st Fragment of Abyss Jewel</span><span class="chip get">Mara Fang</span><span class="chip grp">party taps together, then one guardian each</span></div>
+            <div class="line1"><span class="where" id="s11l">Windy Hill</span><span class="who">from Gludin Village</span><span class="act hunt">Hunt</span></div>
+            <p>Do not just kill the jewel. Bring <strong>Abyssal Jewel 1</strong> <strong>below 50% HP</strong>. Two things happen at 50%:</p>
+            <p><strong>1.</strong> Every party member needs to hit the jewel to get the item. Supports can just auto-attack.<br>
+            <strong>2.</strong> <strong>Jewel Guardian Mara</strong> starts to spawn, and the guards <strong>attack players</strong>.</p>
+            <p>Many guards spawn, so there are fangs for everyone, but they are normal kills: 9 players = at least 9 guards. SoE to Gludin.</p>
+            <div class="loot"><span class="chip get">1st Fragment of Abyss Jewel</span><span class="chip get">Mara Fang</span><span class="chip grp">all hit the jewel, then 1 guardian each</span></div>
           </div>
         </div>
 
@@ -461,9 +500,10 @@
           <span class="idx">13</span>
           <input type="checkbox" id="s13" aria-labelledby="s13l">
           <div class="body">
-            <div class="line1"><span class="where" id="s13l">Sea of Spores</span><span class="who">out of Oren</span><span class="act hunt">Hunt</span></div>
-            <p>Same mechanic as Windy Hill: drop <strong>Abyssal Jewel 2</strong> below <strong>50% HP</strong>, then everyone taps it once for their own fragment &mdash; bare-handed counts. <strong>Jewel Guardian Musfel</strong> spawns in numbers for the fangs, one kill per collector. This is the harder of the two jewels; if the group splits anywhere, do not let it split here. SoE back to Oren.</p>
-            <div class="loot"><span class="chip get">2nd Fragment of Abyss Jewel</span><span class="chip get">Musfel Fang</span><span class="chip grp">party taps together, then one guardian each</span></div>
+            <div class="line1"><span class="where" id="s13l">Sea of Spores</span><span class="who">from Oren</span><span class="act hunt">Hunt</span></div>
+            <p>Same as Windy Hill. Bring <strong>Abyssal Jewel 2</strong> below <strong>50% HP</strong>, then every party member hits it to get the item &mdash; supports can just auto-attack. At 50% <strong>Jewel Guardian Musfel</strong> also starts to spawn, and the guards <strong>attack players</strong>.</p>
+            <p>Guards give the fangs, 1 kill per player. This jewel is stronger than the first one, so keep the party together here. SoE to Oren.</p>
+            <div class="loot"><span class="chip get">2nd Fragment of Abyss Jewel</span><span class="chip get">Musfel Fang</span><span class="chip grp">all hit the jewel, then 1 guardian each</span></div>
           </div>
         </div>
 
@@ -481,21 +521,21 @@
           <input type="checkbox" id="s15" aria-labelledby="s15l">
           <div class="body">
             <div class="line1"><span class="where" id="s15l">Giran, town square</span><span class="who">Gabrielle</span><span class="act talk">Talk</span></div>
-            <p>Third and final visit. She hands over the letter that Gilmore will want.</p>
+            <p>Last visit to her. She gives the letter for Gilmore.</p>
             <div class="loot"><span class="chip get">Herald of Slayer</span></div>
           </div>
         </div>
       </div>
 
       <div class="phase">
-        <div class="phase-head"><span class="tag">Phase 4 &mdash; The lair</span><span class="note">ends where it ends &mdash; no trip back to town</span></div>
+        <div class="phase-head"><span class="tag">Phase 4 &mdash; The lair</span><span class="note">the last NPC stands at the entrance</span></div>
 
         <div class="stop">
           <span class="idx">16</span>
           <input type="checkbox" id="s16" aria-labelledby="s16l">
           <div class="body">
             <div class="line1"><span class="where" id="s16l">Dragon Valley, west entrance</span><span class="who">Antharas Watchman Gilmore</span><span class="act talk">Talk</span></div>
-            <p>Give him the Herald. Then SoE to Giran and take the gatekeeper down to the lair entrance rather than running the valley on foot.</p>
+            <p>Give him the Herald. Then SoE to Giran and take the gatekeeper to the lair &mdash; do not run through the valley.</p>
             <div class="loot"><span class="chip give">Herald of Slayer</span></div>
           </div>
         </div>
@@ -504,9 +544,10 @@
           <span class="idx">17</span>
           <input type="checkbox" id="s17" aria-labelledby="s17l">
           <div class="body">
-            <div class="line1"><span class="where" id="s17l">Antharas' Lair</span><span class="who">Cave Keeper &amp; Cave Maiden</span><span class="act hunt">Hunt</span></div>
-            <p>Kill keepers and maidens until <strong>Abyssal Jewel 3</strong> spawns, then the same mechanic as the other two: below <strong>50% HP</strong>, one tap each, bare-handed if that is all you have. The adds it throws here carry nothing, so kill them or ignore them &mdash; there is no guardian item at this stop. Stay in the first chambers; no need to go near the Heart of Warding yet.</p>
-            <div class="loot"><span class="chip get">3rd Fragment of Abyss Jewel</span><span class="chip grp">party taps together</span></div>
+            <div class="line1"><span class="where" id="s17l">Entrance to the Antharas Lair</span><span class="who">Cave Keeper &amp; Cave Maiden</span><span class="act hunt">Hunt</span></div>
+            <p>Everything happens <strong>at the entrance</strong> &mdash; you do not go inside the lair. Kill Cave Keepers and Cave Maidens here until <strong>Abyssal Jewel 3</strong> spawns. Same as the other two: <strong>below 50% HP</strong>, then every party member hits it to get the item &mdash; supports can just auto-attack.</p>
+            <p>This jewel also spawns some mobs that attack you, but they give <strong>no quest items</strong> &mdash; kill them or leave them.</p>
+            <div class="loot"><span class="chip get">3rd Fragment of Abyss Jewel</span><span class="chip grp">all hit the jewel</span></div>
           </div>
         </div>
 
@@ -514,8 +555,8 @@
           <span class="idx">18</span>
           <input type="checkbox" id="s18" aria-labelledby="s18l">
           <div class="body">
-            <div class="line1"><span class="where" id="s18l">Lair entrance</span><span class="who">Antharas Watchman Theodric</span><span class="act talk">Talk</span></div>
-            <p>He is standing where you came in &mdash; that is the entire point of finishing here. Hand him the last fragment and take the stone.</p>
+            <div class="line1"><span class="where" id="s18l">Entrance to the Antharas Lair</span><span class="who">Antharas Watchman Theodric</span><span class="act talk">Talk</span></div>
+            <p>He stands in the same place &mdash; no travel at all. Give the last fragment and take the stone.</p>
             <div class="loot"><span class="chip give">3rd Fragment</span><span class="chip get">Portal Stone &times;1</span></div>
           </div>
         </div>
@@ -526,31 +567,31 @@
 
   <section>
     <div class="section-head">
-      <h2>Item ledger</h2>
-      <p>Everything you carry at once during Phase 1, and who eventually takes it.</p>
+      <h2>Item list</h2>
+      <p>What you carry after the farm circle, and who takes it.</p>
     </div>
     <div class="scroller">
       <table>
         <thead>
-          <tr><th>Item</th><th>From</th><th>Zone</th><th>Turn in to</th></tr>
+          <tr><th>Item</th><th>Drops from</th><th>Zone</th><th>Give to</th></tr>
         </thead>
         <tbody>
           <tr><td class="item">Marsh Drake Talons</td><td class="mob">Marsh Drake</td><td>Forsaken Plains</td><td class="npc">Kaiena</td></tr>
           <tr><td class="item">Marsh Stalker Horn</td><td class="mob">Marsh Stalker</td><td>Forsaken Plains</td><td class="npc">Kaiena</td></tr>
           <tr><td class="item">Hamrut Leg</td><td class="mob">Hamrut</td><td>Giant's Cave</td><td class="npc">Chakiris</td></tr>
           <tr><td class="item">Kranrot Skin</td><td class="mob">Kranrot</td><td>Giant's Cave</td><td class="npc">Chakiris</td></tr>
-          <tr><td class="item">Remains of Sacrifice</td><td class="mob">Sacrifice of the Sacrificed <em>(spawns off Blood Queen)</em></td><td>Seal of Shilen</td><td class="npc">Orven</td></tr>
-          <tr><td class="item">Totem of Land Dragon</td><td class="mob">Harit Lizardman Zealot <em>(spawns off Matriarch / Shaman)</em></td><td>Forest of Mirrors</td><td class="npc">Kendra</td></tr>
+          <tr><td class="item">Remains of Sacrifice</td><td class="mob">Sacrifice of the Sacrificed <em>(spawns from Blood Queen)</em></td><td>Seal of Shilen</td><td class="npc">Orven</td></tr>
+          <tr><td class="item">Totem of Land Dragon</td><td class="mob">Harit Lizardman Zealot <em>(spawns from Matriarch / Shaman)</em></td><td>Forest of Mirrors</td><td class="npc">Kendra</td></tr>
           <tr><td class="item">1st Fragment + Mara Fang</td><td class="mob">Abyssal Jewel 1, Jewel Guardian Mara</td><td>Windy Hill</td><td class="npc">Moke</td></tr>
           <tr><td class="item">2nd Fragment + Musfel Fang</td><td class="mob">Abyssal Jewel 2, Jewel Guardian Musfel</td><td>Sea of Spores</td><td class="npc">Helton</td></tr>
-          <tr><td class="item">3rd Fragment</td><td class="mob">Abyssal Jewel 3 <em>(spawns off Cave Keeper / Maiden)</em></td><td>Antharas' Lair</td><td class="npc">Theodric</td></tr>
+          <tr><td class="item">3rd Fragment</td><td class="mob">Abyssal Jewel 3 <em>(spawns from Cave Keeper / Maiden)</em></td><td>Antharas' Lair</td><td class="npc">Theodric</td></tr>
         </tbody>
       </table>
     </div>
   </section>
 
   <footer>
-    <div>Route ordering and mechanics are field-tested on <strong>L2Reborn Signature</strong>. Item and NPC names checked against the standard walkthrough at <a href="https://l2-servera.com/en/kategorii/quests/antharas/">l2-servera.com</a> and <a href="https://l2hub.info/quests/337-audience-with-the-land-dragon">L2Hub quest 337</a>.</div>
+    <div>Route and mechanics tested on <strong>L2Reborn Signature</strong>. Item and NPC names checked with <a href="https://l2-servera.com/en/kategorii/quests/antharas/">l2-servera.com</a> and <a href="https://l2hub.info/quests/337-audience-with-the-land-dragon">L2Hub quest 337</a>.</div>
   </footer>
 </div>
 
@@ -596,6 +637,42 @@
     paint();
   });
   paint();
+})();
+</script>
+
+<script>
+(function(){
+  var KEY = "l2guides-theme-v1";
+  var root = document.documentElement;
+  var buttons = Array.prototype.slice.call(document.querySelectorAll(".themer button"));
+
+  function current(){
+    try { var c = localStorage.getItem(KEY); if (c === "light" || c === "dark") return c; }
+    catch (e) {}
+    return "auto";
+  }
+  function apply(choice){
+    if (choice === "auto") {
+      if (window.__hostTheme) root.setAttribute("data-theme", window.__hostTheme);
+      else root.removeAttribute("data-theme");
+    } else {
+      root.setAttribute("data-theme", choice);
+    }
+    buttons.forEach(function(b){
+      b.setAttribute("aria-pressed", String(b.getAttribute("data-theme-set") === choice));
+    });
+  }
+  buttons.forEach(function(b){
+    b.addEventListener("click", function(){
+      var choice = b.getAttribute("data-theme-set");
+      try {
+        if (choice === "auto") localStorage.removeItem(KEY);
+        else localStorage.setItem(KEY, choice);
+      } catch (e) {}
+      apply(choice);
+    });
+  });
+  apply(current());
 })();
 </script>
 </body>
