@@ -1,0 +1,602 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Antharas Run Sheet</title>
+<meta name="description" content="An optimized 18-stop route for the Lineage 2 quest Audience with the Land Dragon, field-tested on L2Reborn Signature.">
+<meta property="og:title" content="Antharas Run Sheet">
+<meta property="og:description" content="Audience with the Land Dragon, reordered so you walk it once.">
+<meta property="og:type" content="article">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>%F0%9F%90%89</text></svg>">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,600;0,700;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root{color-scheme:light dark}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0}
+  img{max-width:100%}
+  [hidden]{display:none!important}
+</style>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#eef0f3;
+    --panel:#f9fafb;
+    --panel-sunk:#e5e8ed;
+    --ink:#101720;
+    --ink-soft:#4b5765;
+    --ink-faint:#77828f;
+    --line:#d3d9e1;
+    --line-strong:#b9c2ce;
+    --bronze:#8a5a1c;
+    --bronze-soft:#f0e3cd;
+    --verdigris:#2c6d64;
+    --verdigris-soft:#d9e9e5;
+    --ember:#a33a24;
+    --ember-soft:#f6e0da;
+    --done:#8d98a5;
+    --shadow:0 1px 2px rgba(16,23,32,.06), 0 8px 24px -16px rgba(16,23,32,.28);
+    --rail:#c6ceda;
+    --fs-display:clamp(2.1rem,1.3rem + 3.4vw,3.4rem);
+  }
+  @media (prefers-color-scheme: dark){
+    :root:not([data-theme="light"]){
+      --ground:#0d131a;
+      --panel:#141c25;
+      --panel-sunk:#101821;
+      --ink:#e7ecf2;
+      --ink-soft:#9dabb9;
+      --ink-faint:#74828f;
+      --line:#24303c;
+      --line-strong:#334252;
+      --bronze:#cf9a4a;
+      --bronze-soft:#2a2015;
+      --verdigris:#5fab9d;
+      --verdigris-soft:#122420;
+      --ember:#dd7156;
+      --ember-soft:#2a150f;
+      --done:#5c6975;
+      --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+      --rail:#27323f;
+    }
+  }
+  :root[data-theme="dark"]{
+    --ground:#0d131a;
+    --panel:#141c25;
+    --panel-sunk:#101821;
+    --ink:#e7ecf2;
+    --ink-soft:#9dabb9;
+    --ink-faint:#74828f;
+    --line:#24303c;
+    --line-strong:#334252;
+    --bronze:#cf9a4a;
+    --bronze-soft:#2a2015;
+    --verdigris:#5fab9d;
+    --verdigris-soft:#122420;
+    --ember:#dd7156;
+    --ember-soft:#2a150f;
+    --done:#5c6975;
+    --shadow:0 1px 2px rgba(0,0,0,.4), 0 10px 28px -18px rgba(0,0,0,.9);
+    --rail:#27323f;
+  }
+
+  *{box-sizing:border-box}
+  body{
+    background:var(--ground);
+    color:var(--ink);
+    font-family:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+    font-size:16px;
+    line-height:1.6;
+    padding-inline:20px;
+    padding-block:0;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:940px;margin:0 auto;padding-block:44px 72px;display:flex;flex-direction:column;gap:44px}
+
+  /* ---------- header ---------- */
+  header{display:flex;flex-direction:column;gap:14px}
+  .eyebrow{
+    font-family:"IBM Plex Mono",ui-monospace,monospace;
+    font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--bronze);font-weight:600;
+  }
+  h1{
+    font-family:Spectral,Georgia,serif;
+    font-weight:700;font-size:var(--fs-display);line-height:1.04;
+    margin:0;text-wrap:balance;letter-spacing:-.015em;
+  }
+  h1 .sub{display:block;font-style:italic;font-weight:400;font-size:.42em;color:var(--ink-soft);margin-top:.5em;letter-spacing:0}
+  .facts{
+    display:flex;flex-wrap:wrap;gap:0;border:1px solid var(--line);border-radius:3px;
+    background:var(--panel);overflow:hidden;
+  }
+  .fact{flex:1 1 150px;padding:12px 16px;border-right:1px solid var(--line)}
+  .fact:last-child{border-right:0}
+  .fact dt{font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin:0}
+  .fact dd{margin:2px 0 0;font-weight:600;font-size:.95rem}
+
+  /* ---------- prose ---------- */
+  h2{
+    font-family:Spectral,Georgia,serif;font-weight:600;font-size:1.55rem;margin:0 0 4px;
+    letter-spacing:-.01em;text-wrap:balance;
+  }
+  h3{font-family:Spectral,Georgia,serif;font-weight:600;font-size:1.12rem;margin:0}
+  p{margin:0;max-width:66ch;color:var(--ink-soft)}
+  p strong{color:var(--ink);font-weight:600}
+  section{display:flex;flex-direction:column;gap:18px}
+  .section-head{display:flex;flex-direction:column;gap:8px}
+
+  /* ---------- thesis ---------- */
+  .thesis{
+    display:grid;grid-template-columns:1fr auto;gap:28px;align-items:center;
+    background:var(--panel);border:1px solid var(--line);border-left:3px solid var(--bronze);
+    border-radius:3px;padding:22px 24px;
+  }
+  .thesis p{max-width:52ch;font-size:.98rem}
+  .count{display:flex;align-items:baseline;gap:14px;font-family:"IBM Plex Mono",monospace;font-variant-numeric:tabular-nums}
+  .count .n{font-size:2.6rem;font-weight:600;line-height:1}
+  .count .old{color:var(--ink-faint);text-decoration:line-through;text-decoration-thickness:1.5px}
+  .count .new{color:var(--bronze)}
+  .count .lbl{display:block;font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;color:var(--ink-faint);margin-top:6px;font-weight:500}
+
+  /* ---------- progress ---------- */
+  .tracker{
+    position:sticky;top:0;z-index:10;background:var(--ground);
+    padding-block:10px;margin-block:-10px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
+    border-bottom:1px solid var(--line);
+  }
+  .bar{flex:1 1 200px;height:6px;background:var(--panel-sunk);border-radius:99px;overflow:hidden;min-width:140px}
+  .bar i{display:block;height:100%;width:0%;background:var(--bronze);transition:width .25s ease}
+  .tracker output{font-family:"IBM Plex Mono",monospace;font-size:.8rem;font-variant-numeric:tabular-nums;color:var(--ink-soft)}
+  .reset{
+    font-family:"IBM Plex Mono",monospace;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;
+    background:none;border:1px solid var(--line-strong);color:var(--ink-soft);
+    padding:5px 10px;border-radius:3px;cursor:pointer;
+  }
+  .reset:hover{border-color:var(--bronze);color:var(--bronze)}
+  .reset:focus-visible,input:focus-visible{outline:2px solid var(--bronze);outline-offset:2px}
+
+  /* ---------- route ---------- */
+  .phase{display:flex;flex-direction:column;gap:0;margin-bottom:26px}
+  .phase-head{
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;
+    padding-bottom:10px;border-bottom:1px solid var(--line-strong);margin-bottom:6px;
+  }
+  .phase-head .tag{
+    font-family:"IBM Plex Mono",monospace;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;
+  }
+  .phase-head .note{font-size:.85rem;color:var(--ink-faint);font-style:italic;font-family:Spectral,Georgia,serif}
+
+  .stop{
+    display:grid;grid-template-columns:34px 26px 1fr;gap:0 14px;
+    padding:16px 0;border-bottom:1px solid var(--line);position:relative;
+  }
+  .stop:last-child{border-bottom:0}
+  .idx{
+    font-family:"IBM Plex Mono",monospace;font-size:.82rem;font-weight:600;color:var(--ink-faint);
+    font-variant-numeric:tabular-nums;padding-top:3px;
+  }
+  .stop input[type=checkbox]{
+    appearance:none;width:17px;height:17px;margin:4px 0 0;border:1.5px solid var(--line-strong);
+    border-radius:2px;background:var(--panel);cursor:pointer;position:relative;flex:none;
+  }
+  .stop input[type=checkbox]:checked{background:var(--bronze);border-color:var(--bronze)}
+  .stop input[type=checkbox]:checked::after{
+    content:"";position:absolute;left:5px;top:1px;width:5px;height:10px;
+    border:solid var(--panel);border-width:0 2px 2px 0;transform:rotate(42deg);
+  }
+  .body{display:flex;flex-direction:column;gap:7px;min-width:0}
+  .line1{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+  .where{font-family:Spectral,Georgia,serif;font-size:1.1rem;font-weight:600;letter-spacing:-.005em}
+  .who{color:var(--ink-soft);font-size:.92rem}
+  .act{
+    font-family:"IBM Plex Mono",monospace;font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+    font-weight:600;padding:2px 7px;border-radius:2px;white-space:nowrap;
+  }
+  .act.hunt{color:var(--verdigris);background:var(--verdigris-soft)}
+  .act.talk{color:var(--bronze);background:var(--bronze-soft)}
+  .act.move{color:var(--ink-faint);background:var(--panel-sunk)}
+  .stop p{font-size:.92rem;max-width:62ch}
+  .loot{display:flex;flex-wrap:wrap;gap:6px;margin-top:1px}
+  .chip{
+    font-family:"IBM Plex Mono",monospace;font-size:.72rem;
+    border:1px solid var(--line-strong);border-radius:2px;padding:2px 8px;color:var(--ink-soft);
+    background:var(--panel);white-space:nowrap;
+  }
+  .chip.get::before{content:"+ ";color:var(--verdigris);font-weight:600}
+  .chip.give::before{content:"\2192 ";color:var(--bronze);font-weight:600}
+  .chip.grp{border-style:dashed;background:transparent;color:var(--ink-faint)}
+  .chip.grp::before{content:"group ";letter-spacing:.06em;text-transform:uppercase;font-size:.86em}
+  .stop.done .where,.stop.done .who,.stop.done p,.stop.done .idx{color:var(--done)}
+  .stop.done .chip{opacity:.5}
+
+  /* ---------- callouts ---------- */
+  .callout{
+    background:var(--ember-soft);border:1px solid var(--line);border-left:3px solid var(--ember);
+    border-radius:3px;padding:16px 20px;display:flex;flex-direction:column;gap:6px;
+  }
+  .callout h3{color:var(--ember)}
+  .callout p{color:var(--ink)}
+  .callout.info{background:var(--verdigris-soft);border-left-color:var(--verdigris)}
+  .callout.info h3{color:var(--verdigris)}
+  .callout ul{margin:2px 0 0;padding-left:1.15em;display:flex;flex-direction:column;gap:5px;font-size:.94rem}
+  .callout li::marker{color:var(--verdigris)}
+  .callout code{font-family:"IBM Plex Mono",monospace;font-size:.88em;background:var(--panel);padding:1px 5px;border-radius:2px;border:1px solid var(--line)}
+
+  /* ---------- ledger ---------- */
+  .scroller{overflow-x:auto;border:1px solid var(--line);border-radius:3px;background:var(--panel)}
+  table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
+  th,td{text-align:left;padding:10px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  thead th{
+    font-family:"IBM Plex Mono",monospace;font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;
+    color:var(--ink-faint);font-weight:600;background:var(--panel-sunk);border-bottom:1px solid var(--line-strong);
+  }
+  tbody tr:last-child td{border-bottom:0}
+  td.item{font-weight:600;color:var(--ink)}
+  td.npc{color:var(--bronze);font-weight:500}
+  td,th{white-space:nowrap}
+  td.item,td.mob{white-space:normal}
+
+  /* ---------- prep ---------- */
+  .prep{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1px;background:var(--line);border:1px solid var(--line);border-radius:3px;overflow:hidden}
+  .prep div{background:var(--panel);padding:16px 18px;display:flex;flex-direction:column;gap:5px}
+  .prep h3{font-size:1rem}
+  .prep p{font-size:.88rem}
+
+  footer{border-top:1px solid var(--line);padding-top:18px;font-size:.82rem;color:var(--ink-faint);display:flex;flex-direction:column;gap:6px}
+  footer a{color:var(--bronze)}
+  ul.plain{margin:0;padding-left:1.1em;color:var(--ink-soft);font-size:.92rem;display:flex;flex-direction:column;gap:5px;max-width:66ch}
+  ul.plain li::marker{color:var(--bronze)}
+
+  @media (max-width:640px){
+    .thesis{grid-template-columns:1fr;gap:18px}
+    .stop{grid-template-columns:26px 22px 1fr;gap:0 10px}
+    .idx{font-size:.74rem}
+    .tracker{position:static}
+  }
+  @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <span class="eyebrow">Quest 337 &middot; Route optimization</span>
+    <h1>Antharas Run Sheet
+      <span class="sub">Audience with the Land Dragon, reordered so you walk it once</span>
+    </h1>
+    <dl class="facts">
+      <div class="fact"><dt>Level</dt><dd>50+</dd></div>
+      <div class="fact"><dt>Start</dt><dd>Gabrielle, Giran</dd></div>
+      <div class="fact"><dt>Reward</dt><dd>Portal Stone &times;1</dd></div>
+      <div class="fact"><dt>Repeatable</dt><dd>Yes &mdash; one stone per run</dd></div>
+      <div class="fact"><dt>Tested on</dt><dd>L2Reborn Signature</dd></div>
+    </dl>
+  </header>
+
+  <div class="thesis">
+    <p>The standard walkthrough ping-pongs: talk to a watchman, fly out, farm one drop, fly back, repeat &mdash; four times over. <strong>This route farms everything first in one Aden-hub circuit, then pays out the marks in geographic order.</strong> Same quest, same items, half the town trips.</p>
+    <div class="count">
+      <span><span class="n old">26</span><span class="lbl">standard steps</span></span>
+      <span><span class="n new">18</span><span class="lbl">stops here</span></span>
+    </div>
+  </div>
+
+  <div class="callout info">
+    <h3>Walked and verified on L2Reborn Signature</h3>
+    <p>The reordering works because drops register while the quest is simply <em>active</em> &mdash; you do not need to have spoken to the watchman who wants an item before the item will drop. That is what lets the whole farm circuit happen up front, and it is confirmed in-game here.</p>
+  </div>
+
+  <div class="callout info">
+    <h3>Bring at least three</h3>
+    <p>Run this in a group of three or more &mdash; solo is possible and thoroughly annoying. Credit is per character, so everyone needs their own copy of every item, but how much that costs the group depends on the step. <strong>Ordinary mobs are roughly one kill per person:</strong> six people want the Marsh Stalker Horn, six Marsh Stalkers die. <strong>The spawner steps are where a group pays off</strong> &mdash; one trigger drops several quest mobs at once, so several people collect in parallel. Each hunting step below says which kind it is.</p>
+  </div>
+
+  <section>
+    <div class="section-head">
+      <h2>Before you undock</h2>
+      <p>Both of these shape the route below.</p>
+    </div>
+    <div class="prep">
+      <div>
+        <h3>Up to 7&times; Scroll of Escape</h3>
+        <p>One out of each farm zone. Most return you to Aden; the one from Forest of Mirrors drops you in Hunters Village &mdash; which is why that leg runs last. Without noblesse you burn one fewer: Giant's Cave is reached on foot from Forsaken Plains.</p>
+      </div>
+      <div>
+        <h3>Noblesse shortcut</h3>
+        <p>If you are noble, take the Anghel Waterfall port out of Aden instead of the Forest of Mirrors gatekeeper run &mdash; it lands you noticeably closer to the Harit camps.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>The route</h2>
+      <p>Eighteen stops, in order. Tick them as you go &mdash; progress is kept in this browser.</p>
+    </div>
+
+    <div class="tracker">
+      <div class="bar"><i id="fill"></i></div>
+      <output id="readout" for="route">0 / 18 stops</output>
+      <button class="reset" id="reset" type="button">Reset run</button>
+    </div>
+
+    <div id="route">
+
+      <div class="phase">
+        <div class="phase-head"><span class="tag">Phase 0 &mdash; Open the quest</span></div>
+        <div class="stop">
+          <span class="idx">01</span>
+          <input type="checkbox" id="s1" aria-labelledby="s1l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s1l">Giran, town square</span><span class="who">Gabrielle</span><span class="act talk">Talk</span></div>
+            <p>Accept the quest. This one conversation is what arms every drop below.</p>
+            <div class="loot"><span class="chip get">Feather of Gabrielle</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head"><span class="tag">Phase 1 &mdash; The Aden farm circuit</span><span class="note">four legs out and back, no NPC in between</span></div>
+
+        <div class="stop">
+          <span class="idx">02</span>
+          <input type="checkbox" id="s2" aria-labelledby="s2l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s2l">Forsaken Plains</span><span class="who">via Aden gatekeeper</span><span class="act hunt">Hunt</span></div>
+            <p>Two mobs, two drops, one trip. Plain drops, so this leg scales with headcount: one Marsh Drake and one Marsh Stalker per person, killed until everybody has the pair. <strong>Noblesse:</strong> SoE back to Aden. <strong>No noblesse:</strong> do not scroll out &mdash; Giant's Cave is a short run from here and the next stop is on foot.</p>
+            <div class="loot"><span class="chip get">Marsh Drake Talons &times;1</span><span class="chip get">Marsh Stalker Horn &times;1</span><span class="chip grp">one kill per person, per item</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">03</span>
+          <input type="checkbox" id="s3" aria-labelledby="s3l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s3l">Giant's Cave</span><span class="who">via Aden gatekeeper</span><span class="act hunt">Hunt</span></div>
+            <p>Two ways in, and they are not equal. <strong>Noblesse:</strong> SoE to Aden and take the noble port straight to the cave entrance. <strong>No noblesse:</strong> skip Aden entirely and run overland from Forsaken Plains &mdash; it is close, and a gatekeeper detour costs more than the run. Hamrut and Kranrot both sit in the outer halls; no need to push deep. Plain drops again &mdash; one of each per person. SoE back to Aden afterwards.</p>
+            <div class="loot"><span class="chip get">Hamrut Leg &times;1</span><span class="chip get">Kranrot Skin &times;1</span><span class="chip grp">one kill per person, per item</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">04</span>
+          <input type="checkbox" id="s4" aria-labelledby="s4l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s4l">Seal of Shilen</span><span class="who">Forbidden Gateway, east of Aden</span><span class="act hunt">Hunt</span></div>
+            <p>Kill Blood Queens until one spawns <strong>Sacrifice of the Sacrificed</strong> &mdash; and it spawns them in quantity, enough to cover a whole party off a single trigger. The cheapest step on the sheet for a group. SoE back to Aden.</p>
+            <div class="loot"><span class="chip get">Remains of Sacrifice &times;1</span><span class="chip grp">one trigger covers the party</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">05</span>
+          <input type="checkbox" id="s5" aria-labelledby="s5l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s5l">Forest of Mirrors</span><span class="who">Harit Lizardman camps</span><span class="act hunt">Hunt</span></div>
+            <p><strong>Noblesse:</strong> take the Anghel Waterfall port out of Aden &mdash; the Harit camps are right at the landing point. <strong>No noblesse:</strong> gatekeeper to Forest of Mirrors and run in from the port. Kill Matriarchs and Shamans to trigger <strong>Harit Lizardman Zealots</strong> &mdash; three per spawn, so three people collect at a time. The efficient shape here is to break the group into cells of one DD and two supports and work separate camps in parallel, rather than stacking everyone on one pull. Run this leg last on purpose: the SoE out of here lands in Hunters Village, which is the next stop.</p>
+            <div class="loot"><span class="chip get">Totem of Land Dragon &times;1</span><span class="chip grp">3 collectors per spawn</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head"><span class="tag">Phase 2 &mdash; Collect four marks</span><span class="note">Hunters Village &rarr; Ivory Tower &rarr; Aden &rarr; Giran, one direction</span></div>
+
+        <div class="stop">
+          <span class="idx">06</span>
+          <input type="checkbox" id="s6" aria-labelledby="s6l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s6l">Hunters Village, Orc Guild</span><span class="who">Prefect Chakiris</span><span class="act talk">Talk</span></div>
+            <p>Hand over the Giant's Cave pair.</p>
+            <div class="loot"><span class="chip give">Hamrut Leg</span><span class="chip give">Kranrot Skin</span><span class="chip get">Mark of Watchman</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">07</span>
+          <input type="checkbox" id="s7" aria-labelledby="s7l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s7l">Ivory Tower, 4th floor</span><span class="who">Magister Kaiena</span><span class="act talk">Talk</span></div>
+            <p>Gatekeeper straight from Hunters Village. Kaiena is up the stairs, not on the entrance floor.</p>
+            <div class="loot"><span class="chip give">Marsh Drake Talons</span><span class="chip give">Marsh Stalker Horn</span><span class="chip get">Mark of Watchman</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">08</span>
+          <input type="checkbox" id="s8" aria-labelledby="s8l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s8l">Aden, Einhasad Temple</span><span class="who">High Priest Orven</span><span class="act talk">Talk</span></div>
+            <div class="loot"><span class="chip give">Remains of Sacrifice</span><span class="chip get">Mark of Watchman</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">09</span>
+          <input type="checkbox" id="s9" aria-labelledby="s9l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s9l">Aden, Warrior Guild</span><span class="who">Master Kendra</span><span class="act talk">Talk</span></div>
+            <p>Same town as Orven &mdash; walk it, do not port.</p>
+            <div class="loot"><span class="chip give">Totem of Land Dragon</span><span class="chip get">Mark of Watchman</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">10</span>
+          <input type="checkbox" id="s10" aria-labelledby="s10l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s10l">Giran, town square</span><span class="who">Gabrielle</span><span class="act talk">Talk</span></div>
+            <p>All four marks in one conversation. She sends you after the abyss jewels.</p>
+            <div class="loot"><span class="chip give">Mark of Watchman &times;4</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head"><span class="tag">Phase 3 &mdash; The two jewels</span><span class="note">farm first, then the NPC standing in the same town</span></div>
+
+        <div class="stop">
+          <span class="idx">11</span>
+          <input type="checkbox" id="s11" aria-labelledby="s11l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s11l">Windy Hill</span><span class="who">out of Gludin Village</span><span class="act hunt">Hunt</span></div>
+            <p>The jewel is not a kill, it is a switch. Beat it <strong>below 50% HP</strong>; from then on a single hit hands the fragment to whoever landed it &mdash; supports and buffers walk up and punch it bare-handed for their own copy, no damage contribution needed. Get the whole party tapping it at once; that is the fastest fragment on the sheet. The jewel also throws out <strong>Jewel Guardian Mara</strong> in numbers, so there are fangs enough to go round, but they are ordinary kills: nine collectors means at least nine guardians down. SoE back to Gludin.</p>
+            <div class="loot"><span class="chip get">1st Fragment of Abyss Jewel</span><span class="chip get">Mara Fang</span><span class="chip grp">party taps together, then one guardian each</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">12</span>
+          <input type="checkbox" id="s12" aria-labelledby="s12l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s12l">Gludin Village, warehouse</span><span class="who">Warehouse Chief Moke</span><span class="act talk">Talk</span></div>
+            <div class="loot"><span class="chip give">1st Fragment</span><span class="chip give">Mara Fang</span><span class="chip get">Mark of Watchman</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">13</span>
+          <input type="checkbox" id="s13" aria-labelledby="s13l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s13l">Sea of Spores</span><span class="who">out of Oren</span><span class="act hunt">Hunt</span></div>
+            <p>Same mechanic as Windy Hill: drop <strong>Abyssal Jewel 2</strong> below <strong>50% HP</strong>, then everyone taps it once for their own fragment &mdash; bare-handed counts. <strong>Jewel Guardian Musfel</strong> spawns in numbers for the fangs, one kill per collector. This is the harder of the two jewels; if the group splits anywhere, do not let it split here. SoE back to Oren.</p>
+            <div class="loot"><span class="chip get">2nd Fragment of Abyss Jewel</span><span class="chip get">Musfel Fang</span><span class="chip grp">party taps together, then one guardian each</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">14</span>
+          <input type="checkbox" id="s14" aria-labelledby="s14l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s14l">Oren, blacksmith workshop</span><span class="who">Blacksmith Helton</span><span class="act talk">Talk</span></div>
+            <div class="loot"><span class="chip give">2nd Fragment</span><span class="chip give">Musfel Fang</span><span class="chip get">Mark of Watchman</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">15</span>
+          <input type="checkbox" id="s15" aria-labelledby="s15l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s15l">Giran, town square</span><span class="who">Gabrielle</span><span class="act talk">Talk</span></div>
+            <p>Third and final visit. She hands over the letter that Gilmore will want.</p>
+            <div class="loot"><span class="chip get">Herald of Slayer</span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase">
+        <div class="phase-head"><span class="tag">Phase 4 &mdash; The lair</span><span class="note">ends where it ends &mdash; no trip back to town</span></div>
+
+        <div class="stop">
+          <span class="idx">16</span>
+          <input type="checkbox" id="s16" aria-labelledby="s16l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s16l">Dragon Valley, west entrance</span><span class="who">Antharas Watchman Gilmore</span><span class="act talk">Talk</span></div>
+            <p>Give him the Herald. Then SoE to Giran and take the gatekeeper down to the lair entrance rather than running the valley on foot.</p>
+            <div class="loot"><span class="chip give">Herald of Slayer</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">17</span>
+          <input type="checkbox" id="s17" aria-labelledby="s17l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s17l">Antharas' Lair</span><span class="who">Cave Keeper &amp; Cave Maiden</span><span class="act hunt">Hunt</span></div>
+            <p>Kill keepers and maidens until <strong>Abyssal Jewel 3</strong> spawns, then the same mechanic as the other two: below <strong>50% HP</strong>, one tap each, bare-handed if that is all you have. The adds it throws here carry nothing, so kill them or ignore them &mdash; there is no guardian item at this stop. Stay in the first chambers; no need to go near the Heart of Warding yet.</p>
+            <div class="loot"><span class="chip get">3rd Fragment of Abyss Jewel</span><span class="chip grp">party taps together</span></div>
+          </div>
+        </div>
+
+        <div class="stop">
+          <span class="idx">18</span>
+          <input type="checkbox" id="s18" aria-labelledby="s18l">
+          <div class="body">
+            <div class="line1"><span class="where" id="s18l">Lair entrance</span><span class="who">Antharas Watchman Theodric</span><span class="act talk">Talk</span></div>
+            <p>He is standing where you came in &mdash; that is the entire point of finishing here. Hand him the last fragment and take the stone.</p>
+            <div class="loot"><span class="chip give">3rd Fragment</span><span class="chip get">Portal Stone &times;1</span></div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="section-head">
+      <h2>Item ledger</h2>
+      <p>Everything you carry at once during Phase 1, and who eventually takes it.</p>
+    </div>
+    <div class="scroller">
+      <table>
+        <thead>
+          <tr><th>Item</th><th>From</th><th>Zone</th><th>Turn in to</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="item">Marsh Drake Talons</td><td class="mob">Marsh Drake</td><td>Forsaken Plains</td><td class="npc">Kaiena</td></tr>
+          <tr><td class="item">Marsh Stalker Horn</td><td class="mob">Marsh Stalker</td><td>Forsaken Plains</td><td class="npc">Kaiena</td></tr>
+          <tr><td class="item">Hamrut Leg</td><td class="mob">Hamrut</td><td>Giant's Cave</td><td class="npc">Chakiris</td></tr>
+          <tr><td class="item">Kranrot Skin</td><td class="mob">Kranrot</td><td>Giant's Cave</td><td class="npc">Chakiris</td></tr>
+          <tr><td class="item">Remains of Sacrifice</td><td class="mob">Sacrifice of the Sacrificed <em>(spawns off Blood Queen)</em></td><td>Seal of Shilen</td><td class="npc">Orven</td></tr>
+          <tr><td class="item">Totem of Land Dragon</td><td class="mob">Harit Lizardman Zealot <em>(spawns off Matriarch / Shaman)</em></td><td>Forest of Mirrors</td><td class="npc">Kendra</td></tr>
+          <tr><td class="item">1st Fragment + Mara Fang</td><td class="mob">Abyssal Jewel 1, Jewel Guardian Mara</td><td>Windy Hill</td><td class="npc">Moke</td></tr>
+          <tr><td class="item">2nd Fragment + Musfel Fang</td><td class="mob">Abyssal Jewel 2, Jewel Guardian Musfel</td><td>Sea of Spores</td><td class="npc">Helton</td></tr>
+          <tr><td class="item">3rd Fragment</td><td class="mob">Abyssal Jewel 3 <em>(spawns off Cave Keeper / Maiden)</em></td><td>Antharas' Lair</td><td class="npc">Theodric</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <footer>
+    <div>Route ordering and mechanics are field-tested on <strong>L2Reborn Signature</strong>. Item and NPC names checked against the standard walkthrough at <a href="https://l2-servera.com/en/kategorii/quests/antharas/">l2-servera.com</a> and <a href="https://l2hub.info/quests/337-audience-with-the-land-dragon">L2Hub quest 337</a>.</div>
+  </footer>
+</div>
+
+<script>
+(function(){
+  var KEY = "antharas-route-v1";
+  var boxes = Array.prototype.slice.call(document.querySelectorAll("#route input[type=checkbox]"));
+  var fill = document.getElementById("fill");
+  var readout = document.getElementById("readout");
+
+  function load(){
+    try { return JSON.parse(localStorage.getItem(KEY) || "{}") || {}; }
+    catch (e) { return {}; }
+  }
+  function save(state){
+    try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+  }
+  function paint(){
+    var done = 0;
+    boxes.forEach(function(b){
+      var stop = b.closest(".stop");
+      if (b.checked) { done++; stop.classList.add("done"); }
+      else { stop.classList.remove("done"); }
+    });
+    var pct = boxes.length ? Math.round(done / boxes.length * 100) : 0;
+    fill.style.width = pct + "%";
+    readout.textContent = done + " / " + boxes.length + " stops";
+  }
+
+  var state = load();
+  boxes.forEach(function(b){
+    if (state[b.id]) b.checked = true;
+    b.addEventListener("change", function(){
+      var s = load();
+      if (b.checked) s[b.id] = 1; else delete s[b.id];
+      save(s);
+      paint();
+    });
+  });
+  document.getElementById("reset").addEventListener("click", function(){
+    boxes.forEach(function(b){ b.checked = false; });
+    save({});
+    paint();
+  });
+  paint();
+})();
+</script>
+</body>
+</html>
