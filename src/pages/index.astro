@@ -1,0 +1,25 @@
+---
+import Base from '../layouts/Base.astro';
+import SectionBlock from '../components/home/SectionBlock.astro';
+import { loadSections } from '../lib/guides';
+
+const sections = await loadSections();
+---
+
+<Base title="Lineage 2 Guides" description="Quest routes and run sheets for Lineage 2, by chronicle.">
+  <header class="hero">
+    <h1>
+      Lineage 2 Guides
+      <span class="sub">Quest routes and run sheets, by chronicle</span>
+    </h1>
+    <p>
+      Quests changed between chronicles, so each guide can have several versions. Pick your chronicle at the top: the
+      matching version is highlighted, and guide links open it.
+    </p>
+  </header>
+  {sections.map((s) => <SectionBlock section={s} />)}
+</Base>
+
+<style>
+  .hero { display: flex; flex-direction: column; gap: 14px; }
+</style>

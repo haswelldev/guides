@@ -1,0 +1,64 @@
+---
+import { render } from 'astro:content';
+import Base from './Base.astro';
+import GuideHeader from '../components/guide/GuideHeader.astro';
+import Summary from '../components/guide/Summary.astro';
+import Route from '../components/guide/Route.astro';
+import ItemTable from '../components/guide/ItemTable.astro';
+import { mdxComponents } from '../components/mdx';
+import type { Guide, Variant } from '../lib/guides';
+
+interface Props {
+  guide: Guide;
+  variant: Variant;
+}
+
+// Every guide renders in the same order: header, summary, MDX prose, route, items, sources.
+const { guide, variant } = Astro.props;
+const d = variant.entry.data;
+const { Content } = await render(variant.entry);
+const stops = d.phases?.reduce((n, p) => n + p.stops.length, 0) ?? 0;
+---
+
+<Base title={`${d.title} (${variant.label}) · Lineage 2 Guides`} description={d.description} ogType="article">
+  <GuideHeader guide={guide} variant={variant} />
+  {d.summary && <Summary {...d.summary} stops={stops} />}
+  <Content components={mdxComponents} />
+  {d.phases && <Route phases={d.phases} storageKey={`l2guides:progress:${variant.entry.id}`} />}
+  {d.items && <ItemTable items={d.items} />}
+  {
+    (d.testedOn || d.sources.length > 0) && (
+      <footer class="sources">
+        {d.testedOn && (
+          <div>
+            Route and mechanics tested on <strong>{d.testedOn}</strong>.
+          </div>
+        )}
+        {d.sources.length > 0 && (
+          <div>
+            Sources:{' '}
+            {d.sources.map((s, i) => (
+              <>
+                {i > 0 && ', '}
+                <a href={s.url}>{s.label}</a>
+              </>
+            ))}
+            .
+          </div>
+        )}
+      </footer>
+    )
+  }
+</Base>
+
+<style>
+  .sources {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+    font-size: 0.82rem;
+    color: var(--ink-faint);
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+</style>

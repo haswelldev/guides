@@ -1,0 +1,68 @@
+---
+import type { Guide, Variant } from '../../lib/guides';
+import { sections } from '../../data/sections';
+import { href } from '../../lib/url';
+import VersionBar from './VersionBar.astro';
+
+interface Props {
+  guide: Guide;
+  variant: Variant;
+}
+
+const { guide, variant } = Astro.props;
+const d = variant.entry.data;
+const section = sections.find((s) => s.id === guide.data.section)!;
+const eyebrow = [guide.data.quest && `Quest ${guide.data.quest.id}`, d.eyebrow].filter(Boolean).join(' · ');
+const facts = [{ label: 'Chronicle', value: variant.label }, ...d.facts];
+if (d.testedOn) facts.push({ label: 'Tested on', value: d.testedOn });
+---
+
+<header class="guide-head">
+  <nav class="crumbs label" aria-label="Breadcrumb">
+    <a href={`${href()}#${section.id}`}>{section.title}</a>
+    <span aria-hidden="true">/</span>
+    <a href={guide.url}>{guide.data.title}</a>
+  </nav>
+  {eyebrow && <span class="eyebrow">{eyebrow}</span>}
+  <h1>
+    {d.title}
+    {d.subtitle && <span class="sub">{d.subtitle}</span>}
+  </h1>
+  <VersionBar guide={guide} current={variant} />
+  <dl class="facts">
+    {
+      facts.map((f) => (
+        <div class="fact">
+          <dt>{f.label}</dt>
+          <dd>{f.value}</dd>
+        </div>
+      ))
+    }
+  </dl>
+</header>
+
+<style>
+  .guide-head { display: flex; flex-direction: column; gap: 14px; }
+  .crumbs { display: flex; gap: 8px; flex-wrap: wrap; }
+  .crumbs a { color: var(--ink-faint); text-decoration: none; }
+  .crumbs a:hover { color: var(--bronze); text-decoration: underline; text-underline-offset: 3px; }
+  .facts {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0;
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    background: var(--panel);
+    overflow: hidden;
+  }
+  .fact { flex: 1 1 150px; padding: 12px 16px; border-right: 1px solid var(--line); }
+  .fact:last-child { border-right: 0; }
+  dt {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+  }
+  dd { margin: 2px 0 0; font-weight: 600; font-size: 0.95rem; }
+</style>

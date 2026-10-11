@@ -1,0 +1,37 @@
+---
+import { chronicles } from '../data/chronicles';
+---
+
+<label class="chron">
+  <span class="label">Chronicle</span>
+  <select id="chronicle-select">
+    <option value="">All</option>
+    {chronicles.map((c) => <option value={c.id}>{c.name}</option>)}
+  </select>
+</label>
+
+<script>
+  import { onChronicle, setChronicle } from '../scripts/prefs';
+
+  const select = document.querySelector<HTMLSelectElement>('#chronicle-select')!;
+  onChronicle((id) => {
+    select.value = id ?? '';
+  });
+  select.addEventListener('change', () => setChronicle(select.value || null));
+</script>
+
+<style>
+  .chron { display: flex; align-items: center; gap: 8px; }
+  select {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    color: var(--ink);
+    background: var(--panel);
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    padding: 4px 8px;
+    cursor: pointer;
+  }
+  select:hover { border-color: var(--bronze); }
+</style>

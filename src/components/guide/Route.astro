@@ -1,0 +1,287 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { inline } from '../../lib/inline';
+
+type Phases = NonNullable<CollectionEntry<'variants'>['data']['phases']>;
+
+interface Props {
+  phases: Phases;
+  /** localStorage key for the checklist; one per guide version. */
+  storageKey: string;
+}
+
+const { phases, storageKey } = Astro.props;
+const total = phases.reduce((n, p) => n + p.stops.length, 0);
+let n = 0;
+---
+
+<section>
+  <div class="section-head">
+    <h2>The route</h2>
+    <p>{total} stops, in this order. Tick the boxes as you go &mdash; your progress is saved in this browser.</p>
+  </div>
+
+  <div class="tracker">
+    <div class="bar"><i></i></div>
+    <output>0 / {total} stops</output>
+    <button class="reset" type="button">Reset run</button>
+  </div>
+
+  <div class="route" data-storage-key={storageKey}>
+    {
+      phases.map((phase, pi) => (
+        <div class="phase">
+          <div class="phase-head">
+            <span class="label">
+              Phase {pi + 1} &mdash; {phase.title}
+            </span>
+            {phase.note && <span class="note">{phase.note}</span>}
+          </div>
+          {phase.stops.map((s) => {
+            const idx = String(++n).padStart(2, '0');
+            const box = `stop-${s.id}`;
+            return (
+              <div class="stop">
+                <span class="idx">{idx}</span>
+                <input type="checkbox" id={box} data-stop={s.id} aria-labelledby={`${box}-l`} />
+                <div class="body">
+                  <div class="line1">
+                    <span class="where" id={`${box}-l`}>
+                      {s.where}
+                    </span>
+                    {s.who && <span class="who">{s.who}</span>}
+                    <span class:list={['act', s.act]}>{s.act}</span>
+                  </div>
+                  {s.text.map((t) => (
+                    <p set:html={inline(t)} />
+                  ))}
+                  {s.do.map((t) => (
+                    <p class="flag do">
+                      <span class="tag">Do</span>
+                      <span set:html={inline(t)} />
+                    </p>
+                  ))}
+                  {s.warn.map((t) => (
+                    <p class="flag warn">
+                      <span class="tag">Danger</span>
+                      <span set:html={inline(t)} />
+                    </p>
+                  ))}
+                  {(s.give.length || s.get.length || s.group) && (
+                    <div class="loot">
+                      {s.give.map((i) => (
+                        <span class="chip give">{i}</span>
+                      ))}
+                      {s.get.map((i) => (
+                        <span class="chip get">{i}</span>
+                      ))}
+                      {s.group && <span class="chip grp">{s.group}</span>}
+                    </div>
+                  )}
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  import { readProgress, writeProgress } from '../../scripts/prefs';
+
+  const route = document.querySelector<HTMLElement>('.route');
+  if (route) {
+    const key = route.dataset.storageKey!;
+    const boxes = [...route.querySelectorAll<HTMLInputElement>('input[type=checkbox]')];
+    const fill = document.querySelector<HTMLElement>('.tracker .bar i')!;
+    const readout = document.querySelector<HTMLOutputElement>('.tracker output')!;
+
+    const paint = () => {
+      const done = boxes.filter((b) => b.checked).length;
+      boxes.forEach((b) => b.closest('.stop')!.classList.toggle('done', b.checked));
+      fill.style.width = `${Math.round((done / boxes.length) * 100)}%`;
+      readout.textContent = `${done} / ${boxes.length} stops`;
+    };
+
+    const saved = readProgress(key);
+    boxes.forEach((b) => {
+      b.checked = !!saved[b.dataset.stop!];
+      b.addEventListener('change', () => {
+        const s = readProgress(key);
+        if (b.checked) s[b.dataset.stop!] = 1;
+        else delete s[b.dataset.stop!];
+        writeProgress(key, s);
+        paint();
+      });
+    });
+    document.querySelector('.tracker .reset')!.addEventListener('click', () => {
+      boxes.forEach((b) => (b.checked = false));
+      writeProgress(key, {});
+      paint();
+    });
+    paint();
+  }
+</script>
+
+<style>
+  .tracker {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: var(--ground);
+    padding-block: 10px;
+    margin-block: -10px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    border-bottom: 1px solid var(--line);
+  }
+  .bar {
+    flex: 1 1 200px;
+    height: 6px;
+    background: var(--panel-sunk);
+    border-radius: 99px;
+    overflow: hidden;
+    min-width: 140px;
+  }
+  .bar i { display: block; height: 100%; width: 0%; background: var(--bronze); transition: width 0.25s ease; }
+  output { font-family: var(--font-mono); font-size: 0.8rem; font-variant-numeric: tabular-nums; color: var(--ink-soft); }
+  .reset {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: none;
+    border: 1px solid var(--line-strong);
+    color: var(--ink-soft);
+    padding: 5px 10px;
+    border-radius: var(--radius);
+    cursor: pointer;
+  }
+  .reset:hover { border-color: var(--bronze); color: var(--bronze); }
+
+  .phase { display: flex; flex-direction: column; margin-bottom: 26px; }
+  .phase-head {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line-strong);
+    margin-bottom: 6px;
+  }
+  .note { font-size: 0.85rem; color: var(--ink-faint); font-style: italic; font-family: var(--font-serif); }
+
+  .stop {
+    display: grid;
+    grid-template-columns: 34px 26px 1fr;
+    gap: 0 14px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  .stop:last-child { border-bottom: 0; }
+  .idx {
+    font-family: var(--font-mono);
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--ink-faint);
+    font-variant-numeric: tabular-nums;
+    padding-top: 3px;
+  }
+  input[type='checkbox'] {
+    appearance: none;
+    width: 17px;
+    height: 17px;
+    margin: 4px 0 0;
+    border: 1.5px solid var(--line-strong);
+    border-radius: 2px;
+    background: var(--panel);
+    cursor: pointer;
+    position: relative;
+  }
+  input[type='checkbox']:checked { background: var(--bronze); border-color: var(--bronze); }
+  input[type='checkbox']:checked::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--panel);
+    border-width: 0 2px 2px 0;
+    transform: rotate(42deg);
+  }
+  .body { display: flex; flex-direction: column; gap: 7px; min-width: 0; }
+  .line1 { display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .where { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; letter-spacing: -0.005em; }
+  .who { color: var(--ink-soft); font-size: 0.92rem; }
+  .act {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 2px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+  .act.hunt { color: var(--verdigris); background: var(--verdigris-soft); }
+  .act.talk { color: var(--bronze); background: var(--bronze-soft); }
+  .act.move { color: var(--ink-faint); background: var(--panel-sunk); }
+  .stop p { font-size: 0.92rem; max-width: 62ch; }
+  .loot { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 1px; }
+  .chip {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    border: 1px solid var(--line-strong);
+    border-radius: 2px;
+    padding: 2px 8px;
+    color: var(--ink-soft);
+    background: var(--panel);
+    white-space: nowrap;
+  }
+  .chip.get::before { content: '+ '; color: var(--verdigris); font-weight: 600; }
+  .chip.give::before { content: '\2192  '; color: var(--bronze); font-weight: 600; }
+  .chip.grp { border-style: dashed; background: transparent; color: var(--ink-faint); }
+  .chip.grp::before { content: 'group '; letter-spacing: 0.06em; text-transform: uppercase; font-size: 0.86em; }
+  .flag {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    max-width: 62ch;
+    padding: 8px 12px;
+    background: var(--accent-soft);
+    border-left: 3px solid var(--accent);
+    border-radius: 2px;
+    color: var(--ink);
+  }
+  .flag.do { --accent: var(--verdigris); --accent-soft: var(--verdigris-soft); }
+  .flag.warn { --accent: var(--ember); --accent-soft: var(--ember-soft); }
+  .flag :global(strong) { color: var(--accent); }
+  .flag .tag {
+    flex: none;
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--panel);
+    background: var(--accent);
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+  .stop.done :is(.where, .who, p, .idx) { color: var(--done); }
+  .stop.done .flag { background: transparent; border-left-color: var(--line-strong); }
+  .stop.done .flag .tag { background: var(--done); }
+  .stop.done .chip { opacity: 0.5; }
+  .stop.done p :global(strong) { color: var(--done); }
+
+  @media (max-width: 640px) {
+    .stop { grid-template-columns: 26px 22px 1fr; gap: 0 10px; }
+    .idx { font-size: 0.74rem; }
+    .tracker { position: static; }
+  }
+</style>

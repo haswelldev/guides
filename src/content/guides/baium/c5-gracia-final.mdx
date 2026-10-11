@@ -1,0 +1,193 @@
+---
+title: Baium Run Sheet
+subtitle: An Arrogant Search, without the guesswork
+description: A clear route for the Lineage 2 quest An Arrogant Search — three arks in one loop, then 10 Blooded Fabrics for Baium.
+eyebrow: Full route
+chronicles: { from: c5, to: gracia-final }
+testedOn: L2Reborn Signature
+facts:
+  - { label: Level, value: 60+ }
+  - { label: Start, value: 'Hanellin, Aden' }
+  - { label: Reward, value: Blooded Fabric ×10 }
+  - { label: Repeatable, value: Yes — 1 fabric per Baium entry }
+
+summary:
+  points:
+    - { label: Potions, text: Buy them at the start — the relic hand-in is then one visit. }
+    - { label: Arks, text: 'One loop: Aden → Giran → Tanor Canyon → Dark Elf Village.' }
+    - { label: 7th floor, text: '**Hits count, not damage** — punch a paralyzed mob.' }
+    - { label: Angels, text: '**A party with a pole** gets all 9 fabrics in 2–3 pulls.' }
+
+phases:
+  - title: Start in Aden
+    note: take the quest, buy the potions, get the powerstone
+    stops:
+      - id: start
+        where: Aden, Dark Elf Guild
+        who: Magister Hanellin
+        act: talk
+        text:
+          - "Take the quest. She sends you to Giant's Cave for a powerstone."
+
+      - id: grocery
+        where: Aden, grocery store
+        act: talk
+        text:
+          - "Buy them now. Hanellin asks for them later, and buying now saves a trip back to the shop."
+        get: [Antidote ×5, Healing Potion ×1]
+
+      - id: giants-cave
+        where: Giant's Cave, lower level
+        who: Lesser Giant Mage & Lesser Giant Elder
+        act: hunt
+        text:
+          - "**With noblesse:** noble port from Aden to Giant's Cave. **Without noblesse:** gatekeeper to Forsaken Plains, then run to the cave — the fastest way there."
+          - "Kill them until **Titan's Powerstone** drops. It is a rare drop, and only the player who lands the **last hit** gets it, so supports need a weapon here too. SoE to Aden."
+        get: [Titan's Powerstone ×1]
+        group: 1 per person, own last hit
+
+      - id: hanellin-letters
+        where: Aden, Dark Elf Guild
+        who: Magister Hanellin
+        act: talk
+        text:
+          - "She gives you 3 letters, one for each ark."
+        give: [Titan's Powerstone]
+        get: [Hanellin's 1st Letter, Hanellin's 2nd Letter, Hanellin's 3rd Letter]
+
+  - title: Three arks
+    note: Aden → Giran → Tanor Canyon → Dark Elf Village
+    stops:
+      - id: claudia
+        where: Aden, north gate
+        who: Claudia Athebaldt
+        act: talk
+        text:
+          - "She marks the ark on your radar."
+        give: [Hanellin's 2nd Letter]
+
+      - id: ark-2
+        where: Cemetery
+        who: Holy Ark of Secrecy 2
+        act: hunt
+        text:
+          - "Gatekeeper from Aden to **Seal of Shilen**: the ark is in the cemetery there, where Cabrio spawns. Go through the gate: Cabrio is on the left, the ark on the right."
+          - "Talk to the ark: **Ark Guardian Elberoth** spawns. The key goes to the player who lands the **last hit**, so supports need a weapon to hit it with. Then talk to the ark again for the relic."
+          - "SoE to Aden, then gatekeeper to Giran."
+        get: [Book of Saint]
+        group: 1 guardian per person, owner lands the last hit
+
+      - id: martien
+        where: Giran
+        who: Martien
+        act: talk
+        text:
+          - "He marks the ark on your radar."
+        give: [Hanellin's 3rd Letter]
+
+      - id: ark-3
+        where: Tanor Canyon, top of the mountain
+        who: Holy Ark of Secrecy 3
+        act: hunt
+        text:
+          - "Same as the first ark: talk to it, kill **Ark Guardian Shadowfang** with your own last hit, talk to the ark again."
+          - "Then travel to the Dark Elf Village."
+        get: [Bough of Saint]
+        group: 1 guardian per person, owner lands the last hit
+
+      - id: harne
+        where: Dark Elf Village
+        who: Magister Harne
+        act: talk
+        text:
+          - "He marks the ark on your radar."
+        give: [Hanellin's 1st Letter]
+
+      - id: ark-1
+        where: Swampland, north of the Dark Elf Village
+        who: "Ark Guardian's Corpse"
+        act: hunt
+        text:
+          - "This ark is different: the key is on **Ark Guardian's Corpse**, a short way east of the ark. Talk to the corpse and **Angel Killer** spawns. It hits hard and has high defence, so bring help."
+          - "You do not need to kill it: on **low HP** it disappears. Talk to the corpse again for the key, then open **Holy Ark of Secrecy 1**."
+          - "**Only players with the quest should hit it** — the key goes to the player whose hit makes it disappear."
+          - "It is undead: Elven Elders and Bishops use their holy nuke. Necromancers use a summon — it has very high resistance to dark magic. Go back to Aden."
+        get: [Blood of Saint]
+        group: 1 spawn per person, owner lands the final hit
+
+  - title: Ten fabrics
+    note: Aden → Tower of Insolence → Aden → Tower of Insolence
+    stops:
+      - id: hanellin-relics
+        where: Aden, Dark Elf Guild
+        who: Magister Hanellin
+        act: talk
+        text:
+          - "Talk to her **twice**: first she takes the relics, then the potions, and gives the White Fabric."
+        do:
+          - "Answer **\"I want to make some money.\"**"
+        warn:
+          - "**Do not answer \"No, I want to meet the Emperor.\"** It gives only 1 fabric and ends the quest."
+        give: [Book of Saint, Bough of Saint, Blood of Saint, Antidote ×5, Healing Potion ×1]
+        get: [White Fabric ×1]
+
+      - id: toi-7
+        where: Tower of Insolence, 7th floor
+        who: Platinum Tribe Shaman & Overlord
+        act: hunt
+        text:
+          - "**The number of hits counts, not the damage.** Hit with **fists**, so the mob stays alive. The easiest way is a Necromancer who paralyzes the mob for you."
+          - "Get as many hits per minute as you can: Bladedancer's Dance of Fury, Prophet's Haste and Berserker Spirit, and ideally Prophecy of Fire or Prophecy of Wind. SoE to Aden."
+        get: [Blooded Fabric ×1]
+        group: 1 held mob = whole party
+
+      - id: hanellin-fabrics
+        where: Aden, Dark Elf Guild
+        who: Magister Hanellin
+        act: talk
+        text:
+          - "Show her the Blooded Fabric. She gives you 9 more White Fabrics for angel blood."
+        get: [White Fabric ×9]
+
+      - id: toi-10
+        where: Tower of Insolence, 7th, 9th or 10th floor
+        who: Guardian Angel & Seal Angel
+        act: hunt
+        text:
+          - "Angel kills turn White Fabrics into Blooded Fabrics. In a party you do not need the last hit, but each kill gives a fabric to only **one** party member with the quest. So pull for 1–2 quest players at a time: they get many fabrics at once."
+          - "The fastest way is AoE with a pole. These floors are often farmed by parties: ask one politely to take you in, and 2–3 pulls give all 9 fabrics."
+          - "Each Blooded Fabric lets you through the **Angelic Vortex** on the top floor once."
+        warn:
+          - "**Do not talk to Hanellin again** while you have fewer than 10 fabrics in total. She takes all of them and ends the quest."
+        get: [Blooded Fabric ×9]
+        group: 1–2 quest players per party
+
+items:
+  - { item: "Titan's Powerstone", from: 'Lesser Giant Mage, Lesser Giant Elder *(rare drop)*', zone: "Giant's Cave", to: Hanellin }
+  - { item: Book of Saint, from: 'Holy Ark of Secrecy 2 *(key from Ark Guardian Elberoth)*', zone: Cemetery, to: Hanellin }
+  - { item: Bough of Saint, from: 'Holy Ark of Secrecy 3 *(key from Ark Guardian Shadowfang)*', zone: Tanor Canyon, to: Hanellin }
+  - { item: Blood of Saint, from: "Holy Ark of Secrecy 1 *(key from Ark Guardian's Corpse, after Angel Killer)*", zone: Swampland, to: Hanellin }
+  - { item: Blooded Fabric ×1, from: 'Platinum Tribe Shaman, Platinum Tribe Overlord *(hits)*', zone: 'Tower of Insolence, 7th floor', to: Angelic Vortex }
+  - { item: Blooded Fabric ×9, from: 'Guardian Angel, Seal Angel *(AoE in a party)*', zone: 'Tower of Insolence, 7th / 9th / 10th floor', to: Angelic Vortex }
+
+sources:
+  - { label: l2-servera.com, url: 'https://l2-servera.com/en/kategorii/quests/baium/' }
+  - { label: L2Scroll, url: 'https://www.l2scroll.com/2017/09/lvl-60-arrogant-search-baium.html' }
+  - { label: L2Hub quest 348, url: 'https://l2hub.info/quests/348-an-arrogant-search' }
+  - { label: L2J Interlude quest script, url: 'https://github.com/L2j-Piggy/L2-Interlude/tree/HEAD/data/scripts/quests/Q00348_AnArrogantSearch' }
+---
+
+<Callout title="Everyone runs their own quest">
+  Every player needs their own powerstone, keys and fabrics, but a party still makes it much faster. **Ark guardians:** only one spawns at a time, so take turns — one player opens the ark, the party fights, the owner lands the last hit. **7th floor:** hits count per player, so the whole party can punch the same paralyzed mob at once. **Angels:** each kill gives a fabric to only one party member with the quest, so take turns, 1–2 players at a time.
+</Callout>
+
+<Section title="Before you start" lead="Two things that change the run.">
+  <Cards>
+    <Card title="A party for the arks">
+      2–3 people make the arks quick. Supports need a weapon for the last hit.
+    </Card>
+    <Card title="A party for the 7th floor">
+      A Necromancer to paralyze, plus attack speed: Bladedancer, Prophet, and Prophecy of Fire or Wind if you can get it.
+    </Card>
+  </Cards>
+</Section>

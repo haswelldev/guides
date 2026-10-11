@@ -1,0 +1,17 @@
+---
+// <Cards><Card title="…">…</Card>…</Cards> — a grid of short tips.
+---
+
+<div class="cards"><slot /></div>
+
+<style>
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+</style>

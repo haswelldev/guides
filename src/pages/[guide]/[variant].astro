@@ -1,0 +1,17 @@
+---
+import GuideLayout from '../../layouts/GuideLayout.astro';
+import { loadGuides } from '../../lib/guides';
+
+export async function getStaticPaths() {
+  return (await loadGuides()).flatMap((guide) =>
+    guide.variants.map((variant) => ({
+      params: { guide: guide.id, variant: variant.slug },
+      props: { guide, variant },
+    })),
+  );
+}
+
+const { guide, variant } = Astro.props;
+---
+
+<GuideLayout guide={guide} variant={variant} />

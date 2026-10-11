@@ -1,0 +1,88 @@
+---
+title: Valakas Run Sheet
+subtitle: Into the Flame, with one walk to Klein instead of two
+description: A route for the Lineage 2 quest Into the Flame — 50 Vacualite Ore for a Floating Stone to the Hall of Flames.
+eyebrow: Faster route
+chronicles: { from: c5, to: gracia-final }
+testedOn: L2Reborn Signature
+facts:
+  - { label: Level, value: 60+ }
+  - { label: Start, value: 'Klein, Forge of the Gods' }
+  - { label: Reward, value: Floating Stone ×1 }
+  - { label: Repeatable, value: Yes — 1 stone per Valakas entry }
+
+summary:
+  points:
+    - { label: Klein once, text: '**Take the quest again** when Klein gives you the stone — the next run starts at Hilda in Goddard.' }
+    - { label: Solo or duo, text: 'A big party is slow. Alone or with one support is fastest.' }
+    - { label: Run time, text: 'A level 75 nuker with clan hall buffs does a whole run in about 15 minutes, once the quest is taken.' }
+
+phases:
+  - title: Start at Klein
+    note: only for your first stone
+    stops:
+      - id: klein-start
+        where: Forge of the Gods
+        who: Watcher of Valakas Klein
+        act: talk
+        text:
+          - "**With noblesse:** noble teleport to Entrance to the Forge of the Gods. **Without noblesse:** the closest run is from Hot Springs. Even easier: ask friends or your alliance for a summon — someone often has a summoner standing at Klein."
+          - "From the entrance: go down and cross the bridge, take the first left, then keep to the right at every turn until you reach Klein. The rooms on the way have aggressive mobs; a Bladedancer's **Dance of Shadow** or a dagger's **Silent Move** gets you through without fights."
+          - "Take the quest. SoE to Goddard."
+
+  - title: Vacualite
+    note: Goddard → Garden of Wild Beasts → Goddard
+    stops:
+      - id: hilda-ore
+        where: Goddard, blacksmith shop
+        who: Blacksmith Hilda
+        act: talk
+        text:
+          - "She sends you for 50 Vacualite Ore. **Talk to her before you hunt:** the ore only drops after this talk."
+
+      - id: garden
+        where: Garden of Wild Beasts, around Goddard
+        who: Kookaburra, Bandersnatch & Grendel
+        act: hunt
+        text:
+          - "Kill them until you have **50 Vacualite Ore**. They are weak mobs with half the normal HP, and about 2 of 3 kills drop an ore."
+          - "**Buffalo** and **Antelope** live in the same zone but drop nothing for this quest — skip them. SoE to Goddard."
+        get: [Vacualite Ore ×50]
+        group: solo or duo, 1 ore per kill to one member
+
+      - id: hilda-vacualite
+        where: Goddard, blacksmith shop
+        who: Blacksmith Hilda
+        act: talk
+        give: [Vacualite Ore ×50]
+        get: [Vacualite]
+
+  - title: Floating Stone
+    note: the same way as the first time
+    stops:
+      - id: klein-stone
+        where: Forge of the Gods
+        who: Watcher of Valakas Klein
+        act: talk
+        text:
+          - "Same way as before: noble teleport, run from Hot Springs, or a summon."
+          - "When you go to Valakas, Klein ports you to the hallway above the lava behind him. The stone is used up."
+        do:
+          - "**Talk to Klein again and take the quest again** right away. Your next run then starts at Hilda."
+        give: [Vacualite]
+        get: [Floating Stone ×1]
+
+items:
+  - { item: Vacualite Ore, from: 'Kookaburra, Bandersnatch, Grendel *(not Buffalo or Antelope)*', zone: Garden of Wild Beasts, to: Hilda }
+  - { item: Vacualite, from: 'Hilda *(made from 50 ore)*', zone: Goddard, to: Klein }
+
+sources:
+  - { label: PMfun, url: 'https://lineage.pmfun.com/list/quest-more/into-the-flame' }
+  - { label: l2-servera.com, url: 'https://l2-servera.com/en/kategorii/quests/into-the-flame-618/' }
+  - { label: Linedia, url: 'https://linedia.com.ua/interlude/articles/quest-valakas' }
+  - { label: L2J Interlude quest script, url: 'https://github.com/L2j-Piggy/L2-Interlude/tree/HEAD/data/scripts/quests/Q00618_IntoTheFlame' }
+---
+
+<Callout title="Alone or in a duo">
+  Each kill gives an ore to only one party member with the quest, so in a big party everyone waits a long time for their 50. Do it alone or with one support. If you came as a group, **split up** and farm in different spots — everyone gets their ore faster.
+</Callout>

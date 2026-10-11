@@ -1,0 +1,228 @@
+---
+title: Antharas Run Sheet
+subtitle: Audience with the Land Dragon, in a better order
+description: A faster route for the Lineage 2 quest Audience with the Land Dragon. 18 stops, tested on L2Reborn Signature.
+eyebrow: Faster route
+chronicles: { from: c5, to: gracia-final }
+testedOn: L2Reborn Signature
+facts:
+  - { label: Level, value: 50+ }
+  - { label: Start, value: 'Gabrielle, Giran' }
+  - { label: Reward, value: Portal Stone ×1 }
+  - { label: Repeatable, value: Yes — 1 stone per run }
+
+summary:
+  points:
+    - { label: Farm first, text: '**Kill everything in one circle around Aden** — items drop as soon as the quest is started.' }
+    - { label: Hand in once, text: 'Give all the items in one trip: Hunters Village → Ivory Tower → Aden → Giran.' }
+    - { label: Jewels, text: 'Kill first, then talk to the NPC in the town you SoE to.' }
+  baseline: { count: 26, label: normal guide }
+
+phases:
+  - title: Start the quest
+    stops:
+      - id: start
+        where: Giran, town square
+        who: Gabrielle
+        act: talk
+        text:
+          - "Take the quest. After this talk, all quest items below can drop."
+        get: [Feather of Gabrielle]
+
+  - title: Farm circle from Aden
+    note: four trips out and back, no NPC in between
+    stops:
+      - id: forsaken-plains
+        where: Forsaken Plains
+        who: Aden gatekeeper
+        act: hunt
+        text:
+          - 'Kill Marsh Drake and Marsh Stalker. They walk in the same area, so kill what you see. Normal drops: 1 mob per person for each item.'
+          - "**With noblesse:** SoE to Aden. **Without noblesse:** do not SoE — run to Giant's Cave from here."
+        get: [Marsh Drake Talons ×1, Marsh Stalker Horn ×1]
+        group: 1 mob per person
+
+      - id: giants-cave
+        where: Giant's Cave
+        who: Hamrut & Kranrot
+        act: hunt
+        text:
+          - '**With noblesse:** SoE to Aden, then noble port to the cave. **Without noblesse:** run here from Forsaken Plains, it is close — faster than going back to town.'
+          - 'Both mobs are in the first halls, you do not need to go deep. Normal drops again: 1 mob per person for each item. SoE to Aden after.'
+        get: [Hamrut Leg ×1, Kranrot Skin ×1]
+        group: 1 mob per person
+
+      - id: seal-of-shilen
+        where: Seal of Shilen
+        who: east of Aden
+        act: hunt
+        text:
+          - Kill Blood Queens until one spawns **Sacrifice of the Sacrificed**. It spawns many of them — one pull is enough for the whole party. This is the fastest step for a group. SoE to Aden.
+        get: [Remains of Sacrifice ×1]
+        group: 1 pull = whole party
+
+      - id: forest-of-mirrors
+        where: Forest of Mirrors
+        who: Harit Lizardman camps
+        act: hunt
+        text:
+          - '**With noblesse:** Anghel Waterfall port from Aden — the camps are right there. **Without noblesse:** gatekeeper to Forest of Mirrors, then run in.'
+          - 'Kill Matriarch and Shaman to spawn **Harit Lizardman Zealots**. Each spawn gives 3, so 3 people get the totem at the same time. Best way for a group: split into small teams of 1 DD + 2 supports and pull different camps.'
+          - 'Do this zone last: SoE from here brings you to Hunters Village, which is the next stop.'
+        get: [Totem of Land Dragon ×1]
+        group: 3 people per spawn
+
+  - title: Get 4 marks
+    note: Hunters Village → Ivory Tower → Aden → Giran
+    stops:
+      - id: chakiris
+        where: Hunters Village, Orc Guild
+        who: Prefect Chakiris
+        act: talk
+        give: [Hamrut Leg, Kranrot Skin]
+        get: [Mark of Watchman]
+
+      - id: kaiena
+        where: Ivory Tower, 4th floor
+        who: Magister Kaiena
+        act: talk
+        text:
+          - "Gatekeeper from Hunters Village. She is on the 4th floor, not on the entrance floor."
+        give: [Marsh Drake Talons, Marsh Stalker Horn]
+        get: [Mark of Watchman]
+
+      - id: orven
+        where: Aden, Einhasad Temple
+        who: High Priest Orven
+        act: talk
+        give: [Remains of Sacrifice]
+        get: [Mark of Watchman]
+
+      - id: kendra
+        where: Aden, Warrior Guild
+        who: Master Kendra
+        act: talk
+        text:
+          - "Same town as Orven — just walk, do not use the gatekeeper."
+        give: [Totem of Land Dragon]
+        get: [Mark of Watchman]
+
+      - id: gabrielle-marks
+        where: Giran, town square
+        who: Gabrielle
+        act: talk
+        text:
+          - "Give all 4 marks in one talk. She sends you to the abyss jewels."
+        give: [Mark of Watchman ×4]
+
+  - title: Two jewels
+    note: kill first, then talk to the NPC in the same town
+    stops:
+      - id: windy-hill
+        where: Windy Hill
+        who: from Gludin Village
+        act: hunt
+        text:
+          - 'Do not just kill the jewel. Bring **Abyssal Jewel 1** **below 50% HP**. Two things happen at 50%:'
+          - '**1.** Every party member needs to hit the jewel to get the item. Supports can just auto-attack.'
+          - '**2.** **Jewel Guardian Mara** starts to spawn, and the guards **attack players**.'
+          - 'Many guards spawn, so there are fangs for everyone, but they are normal kills: 9 players = at least 9 guards. SoE to Gludin.'
+        get: [1st Fragment of Abyss Jewel, Mara Fang]
+        group: all hit the jewel, then 1 guardian each
+
+      - id: moke
+        where: Gludin Village, warehouse
+        who: Warehouse Chief Moke
+        act: talk
+        give: [1st Fragment, Mara Fang]
+        get: [Mark of Watchman]
+
+      - id: sea-of-spores
+        where: Sea of Spores
+        who: from Oren
+        act: hunt
+        text:
+          - Same as Windy Hill. Bring **Abyssal Jewel 2** below **50% HP**, then every party member hits it to get the item — supports can just auto-attack. At 50% **Jewel Guardian Musfel** also starts to spawn, and the guards **attack players**.
+          - Guards give the fangs, 1 kill per player. This jewel is stronger than the first one, so keep the party together here. SoE to Oren.
+        get: [2nd Fragment of Abyss Jewel, Musfel Fang]
+        group: all hit the jewel, then 1 guardian each
+
+      - id: helton
+        where: Oren, blacksmith workshop
+        who: Blacksmith Helton
+        act: talk
+        give: [2nd Fragment, Musfel Fang]
+        get: [Mark of Watchman]
+
+      - id: gabrielle-herald
+        where: Giran, town square
+        who: Gabrielle
+        act: talk
+        text:
+          - "Last visit to her. She gives the letter for Gilmore."
+        get: [Herald of Slayer]
+
+  - title: The lair
+    note: the last NPC stands at the entrance
+    stops:
+      - id: gilmore
+        where: Dragon Valley, west entrance
+        who: Antharas Watchman Gilmore
+        act: talk
+        text:
+          - "Give him the Herald. Then SoE to Giran and take the gatekeeper to the lair — do not run through the valley."
+        give: [Herald of Slayer]
+
+      - id: lair-entrance
+        where: Entrance to the Antharas Lair
+        who: Cave Keeper & Cave Maiden
+        act: hunt
+        text:
+          - 'Everything happens **at the entrance** — you do not go inside the lair. Kill Cave Keepers and Cave Maidens here until **Abyssal Jewel 3** spawns. Same as the other two: **below 50% HP**, then every party member hits it to get the item — supports can just auto-attack.'
+          - This jewel also spawns some mobs that attack you, but they give **no quest items** — kill them or leave them.
+        get: [3rd Fragment of Abyss Jewel]
+        group: all hit the jewel
+
+      - id: theodric
+        where: Entrance to the Antharas Lair
+        who: Antharas Watchman Theodric
+        act: talk
+        text:
+          - "He stands in the same place — no travel at all. Give the last fragment and take the stone."
+        give: [3rd Fragment]
+        get: [Portal Stone ×1]
+
+items:
+  - { item: Marsh Drake Talons, from: Marsh Drake, zone: Forsaken Plains, to: Kaiena }
+  - { item: Marsh Stalker Horn, from: Marsh Stalker, zone: Forsaken Plains, to: Kaiena }
+  - { item: Hamrut Leg, from: Hamrut, zone: "Giant's Cave", to: Chakiris }
+  - { item: Kranrot Skin, from: Kranrot, zone: "Giant's Cave", to: Chakiris }
+  - { item: Remains of Sacrifice, from: 'Sacrifice of the Sacrificed *(spawns from Blood Queen)*', zone: Seal of Shilen, to: Orven }
+  - { item: Totem of Land Dragon, from: 'Harit Lizardman Zealot *(spawns from Matriarch / Shaman)*', zone: Forest of Mirrors, to: Kendra }
+  - { item: 1st Fragment + Mara Fang, from: 'Abyssal Jewel 1, Jewel Guardian Mara', zone: Windy Hill, to: Moke }
+  - { item: 2nd Fragment + Musfel Fang, from: 'Abyssal Jewel 2, Jewel Guardian Musfel', zone: Sea of Spores, to: Helton }
+  - { item: 3rd Fragment, from: 'Abyssal Jewel 3 *(spawns from Cave Keeper / Maiden)*', zone: "Antharas' Lair", to: Theodric }
+
+sources:
+  - { label: l2-servera.com, url: 'https://l2-servera.com/en/kategorii/quests/antharas/' }
+  - { label: L2Hub quest 337, url: 'https://l2hub.info/quests/337-audience-with-the-land-dragon' }
+---
+
+<Callout title="Tested on L2Reborn Signature">
+  You can farm the items *before* you talk to the NPC who asks for them. The quest only needs to be started. This is why the whole farm part can be done first.
+</Callout>
+
+<Callout title="Bring 3 people or more">
+  Solo works, but it is slow and boring. Everyone needs their own items. **Normal mobs: about 1 mob per person.** Example: 6 people want the Marsh Stalker Horn, so you kill 6 Marsh Stalkers. **Spawn mobs are better for a group** — one pull spawns several quest mobs, so several people get the item at the same time. Every hunt step below says which type it is.
+</Callout>
+
+<Section title="Before you start" lead="Two things that change the route.">
+  <Cards>
+    <Card title="Up to 7 SoE">
+      One to leave each farm zone. Most of them bring you to Aden. The one from Forest of Mirrors brings you to Hunters Village — that is why this zone is last. Without noblesse you use one less, because you run to Giant's Cave on foot.
+    </Card>
+    <Card title="Noblesse port">
+      With noblesse, use the Anghel Waterfall port from Aden. It puts you next to the Harit camps, much closer than the normal Forest of Mirrors port.
+    </Card>
+  </Cards>
+</Section>

@@ -1,0 +1,82 @@
+---
+import Base from '../../layouts/Base.astro';
+import { loadGuides } from '../../lib/guides';
+import { sections } from '../../data/sections';
+import { href } from '../../lib/url';
+
+export async function getStaticPaths() {
+  return (await loadGuides()).map((guide) => ({
+    params: { guide: guide.id },
+    props: { guide },
+  }));
+}
+
+// Guide landing: sends the visitor to the version for their chronicle (or the only version).
+// Without JS, or with no match, it lists the versions.
+const { guide } = Astro.props;
+const section = sections.find((s) => s.id === guide.data.section)!;
+const versions = guide.variants.map((v) => ({ url: v.url, chronicles: v.chronicles }));
+---
+
+<Base title={`${guide.data.title} · Lineage 2 Guides`} description={guide.data.blurb}>
+  <script is:inline data-versions={JSON.stringify(versions)}>
+    (function () {
+      var versions = JSON.parse(document.currentScript.dataset.versions);
+      var pick = null;
+      try {
+        var c = localStorage.getItem('l2guides-chronicle-v1');
+        if (c) pick = versions.find(function (v) { return v.chronicles.indexOf(c) !== -1; });
+      } catch (e) {}
+      if (!pick && versions.length === 1) pick = versions[0];
+      if (pick) location.replace(pick.url);
+    })();
+  </script>
+  <header class="head">
+    <nav class="label"><a href={`${href()}#${section.id}`}>{section.title}</a></nav>
+    <h1>
+      {guide.data.title}
+      {guide.data.quest && <span class="sub">Quest {guide.data.quest.id} · {guide.data.quest.name}</span>}
+    </h1>
+    <p>{guide.data.blurb}</p>
+  </header>
+  <section>
+    <div class="section-head">
+      <h2>Choose your chronicle</h2>
+      <p>This quest is different between chronicles. Pick the version for your server.</p>
+    </div>
+    <ul class="versions">
+      {
+        guide.variants.map((v) => (
+          <li>
+            <a href={v.url}>
+              <strong>{v.label}</strong>
+              <span>{v.entry.data.title}</span>
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</Base>
+
+<style>
+  .head { display: flex; flex-direction: column; gap: 14px; }
+  .head nav a { color: var(--ink-faint); text-decoration: none; }
+  .versions { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .versions a {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    padding: 14px 18px;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--bronze);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--ink);
+  }
+  .versions a:hover { border-color: var(--bronze); }
+  .versions strong { font-family: var(--font-mono); font-size: 0.9rem; }
+  .versions span { color: var(--ink-soft); font-size: 0.92rem; }
+</style>

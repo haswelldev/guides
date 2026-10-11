@@ -1,0 +1,96 @@
+---
+import type { Guide, Variant } from '../../lib/guides';
+import { chronicles } from '../../data/chronicles';
+
+interface Props {
+  guide: Guide;
+  current: Variant;
+}
+
+const { guide, current } = Astro.props;
+// For the "your chronicle is not covered" notice, resolved client-side.
+const versions = guide.variants.map((v) => ({ label: v.label, url: v.url, chronicles: v.chronicles }));
+const names = Object.fromEntries(chronicles.map((c) => [c.id, c.name]));
+---
+
+{
+  guide.variants.length > 1 && (
+    <nav class="versions" aria-label="Chronicle versions">
+      {guide.variants.map((v) => (
+        <a href={v.url} aria-current={v === current ? 'page' : undefined}>
+          {v.label}
+        </a>
+      ))}
+    </nav>
+  )
+}
+<p
+  class="notice"
+  id="chronicle-notice"
+  data-chronicles={current.chronicles.join(' ')}
+  data-versions={JSON.stringify(versions)}
+  data-names={JSON.stringify(names)}
+  hidden
+>
+</p>
+
+<script>
+  import { covers, onChronicle } from '../../scripts/prefs';
+
+  interface Version { label: string; url: string; chronicles: string[] }
+
+  const notice = document.querySelector<HTMLElement>('#chronicle-notice');
+  if (notice) {
+    const versions: Version[] = JSON.parse(notice.dataset.versions!);
+    const names: Record<string, string> = JSON.parse(notice.dataset.names!);
+
+    onChronicle((id) => {
+      if (!id || covers(notice, id)) {
+        notice.hidden = true;
+        return;
+      }
+      const match = versions.find((v) => v.chronicles.includes(id));
+      notice.replaceChildren(`This version is not for ${names[id] ?? id}. `);
+      if (match) {
+        const a = document.createElement('a');
+        a.href = match.url;
+        a.textContent = `Open the ${match.label} version`;
+        notice.append(a, '.');
+      } else {
+        notice.append('There is no version for it yet.');
+      }
+      notice.hidden = false;
+    });
+  }
+</script>
+
+<style>
+  .versions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    border-bottom: 1px solid var(--line-strong);
+  }
+  .versions a {
+    font-family: var(--font-mono);
+    font-size: 0.74rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--ink-faint);
+    text-decoration: none;
+    padding: 6px 14px;
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+  }
+  .versions a:hover { color: var(--ink); }
+  .versions a[aria-current='page'] { color: var(--bronze); border-bottom-color: var(--bronze); }
+  .notice {
+    max-width: none;
+    color: var(--ink);
+    background: var(--ember-soft);
+    border-left: 3px solid var(--ember);
+    border-radius: var(--radius);
+    padding: 10px 14px;
+    font-size: 0.92rem;
+  }
+</style>

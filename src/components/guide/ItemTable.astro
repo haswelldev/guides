@@ -1,0 +1,56 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { inline } from '../../lib/inline';
+
+interface Props {
+  items: NonNullable<CollectionEntry<'variants'>['data']['items']>;
+}
+
+const { items } = Astro.props;
+---
+
+<section>
+  <div class="section-head">
+    <h2>Item list</h2>
+    <p>Every quest item, where it drops, and who takes it.</p>
+  </div>
+  <div class="scroller">
+    <table>
+      <thead>
+        <tr><th>Item</th><th>Drops from</th><th>Zone</th><th>Give to</th></tr>
+      </thead>
+      <tbody>
+        {
+          items.map((r) => (
+            <tr>
+              <td class="item">{r.item}</td>
+              <td class="mob" set:html={inline(r.from)} />
+              <td>{r.zone}</td>
+              <td class="npc">{r.to}</td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+  .scroller { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: var(--panel); }
+  table { border-collapse: collapse; width: 100%; min-width: 640px; font-size: 0.88rem; }
+  th, td { text-align: left; padding: 10px 14px; border-bottom: 1px solid var(--line); vertical-align: top; white-space: nowrap; }
+  thead th {
+    font-family: var(--font-mono);
+    font-size: 0.66rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    font-weight: 600;
+    background: var(--panel-sunk);
+    border-bottom: 1px solid var(--line-strong);
+  }
+  tbody tr:last-child td { border-bottom: 0; }
+  td.item { font-weight: 600; color: var(--ink); white-space: normal; }
+  td.mob { white-space: normal; }
+  td.npc { color: var(--bronze); font-weight: 500; }
+</style>

@@ -1,0 +1,33 @@
+---
+// <Callout title="…" kind="info|warn">…</Callout> — available in every guide .mdx without importing.
+interface Props {
+  title: string;
+  kind?: 'info' | 'warn';
+}
+
+const { title, kind = 'info' } = Astro.props;
+---
+
+<div class:list={['callout', kind]}>
+  <h3>{title}</h3>
+  <slot />
+</div>
+
+<style>
+  .callout {
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--accent);
+    background: var(--accent-soft);
+    border-radius: var(--radius);
+    padding: 16px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .info { --accent: var(--verdigris); --accent-soft: var(--verdigris-soft); }
+  .warn { --accent: var(--ember); --accent-soft: var(--ember-soft); }
+  h3 { color: var(--accent); }
+  .callout :global(p) { color: var(--ink); }
+  .callout :global(ul) { margin: 2px 0 0; padding-left: 1.15em; display: flex; flex-direction: column; gap: 5px; font-size: 0.94rem; }
+  .callout :global(li::marker) { color: var(--accent); }
+</style>

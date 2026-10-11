@@ -1,0 +1,7 @@
+title: Valakas
+section: epic-raid-bosses
+order: 30
+blurb: The access quest for Valakas. Walk to Klein once, then every stone after that starts in Goddard.
+quest:
+  id: 618
+  name: Into the Flame

@@ -1,0 +1,46 @@
+---
+import GuideCard from './GuideCard.astro';
+import type { loadSections } from '../../lib/guides';
+
+interface Props {
+  section: Awaited<ReturnType<typeof loadSections>>[number];
+}
+
+const { section } = Astro.props;
+---
+
+<section id={section.id}>
+  <div class="section-head">
+    <h2>{section.title}</h2>
+    <p>{section.description}</p>
+  </div>
+  <div class="grid">
+    {section.guides.map((g) => <GuideCard guide={g} />)}
+  </div>
+</section>
+
+<script>
+  import { covers, onChronicle } from '../../scripts/prefs';
+
+  const names = Object.fromEntries(
+    [...document.querySelectorAll<HTMLOptionElement>('#chronicle-select option')].map((o) => [o.value, o.text]),
+  );
+
+  // Highlight the version that matches the visitor's chronicle; dim guides that have none.
+  onChronicle((id) => {
+    document.querySelectorAll<HTMLElement>('.badge[data-chronicles]').forEach((b) => {
+      b.classList.toggle('is-match', !!id && covers(b, id));
+    });
+    document.querySelectorAll<HTMLElement>('article[data-chronicles]').forEach((card) => {
+      const off = !!id && !covers(card, id);
+      card.classList.toggle('is-off', off);
+      const missing = card.querySelector<HTMLElement>('.missing')!;
+      missing.hidden = !off;
+      if (off) missing.textContent = `No version for ${names[id!] ?? id} yet.`;
+    });
+  });
+</script>
+
+<style>
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 16px; }
+</style>

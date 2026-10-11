@@ -1,0 +1,104 @@
+---
+import { inline } from '../../lib/inline';
+
+interface Props {
+  text?: string;
+  points: { label: string; text: string }[];
+  stops: number;
+  baseline?: { count: number; label: string };
+}
+
+const { text, points, stops, baseline } = Astro.props;
+---
+
+<div class="summary">
+  <div class="body">
+    {text && <p set:html={inline(text)} />}
+    {
+      points.length > 0 && (
+        <dl class="points">
+          {points.map((pt) => (
+            <div>
+              <dt>{pt.label}</dt>
+              <dd set:html={inline(pt.text)} />
+            </div>
+          ))}
+        </dl>
+      )
+    }
+  </div>
+  {
+    baseline && (
+      <div class="count">
+        <span>
+          <span class="n old">{baseline.count}</span>
+          <span class="lbl">{baseline.label}</span>
+        </span>
+        <span>
+          <span class="n new">{stops}</span>
+          <span class="lbl">stops here</span>
+        </span>
+      </div>
+    )
+  }
+</div>
+
+<style>
+  .summary {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 28px;
+    align-items: center;
+    background: var(--panel);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--bronze);
+    border-radius: var(--radius);
+    padding: 22px 24px;
+  }
+  .body { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+  p { max-width: 52ch; font-size: 0.98rem; }
+  .points { margin: 0; display: flex; flex-direction: column; }
+  .points div {
+    display: grid;
+    grid-template-columns: 9.5rem 1fr;
+    gap: 16px;
+    padding: 9px 0;
+    border-top: 1px solid var(--line);
+    align-items: baseline;
+  }
+  .points div:first-child { border-top: 0; padding-top: 0; }
+  .points div:last-child { padding-bottom: 0; }
+  dt {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--bronze);
+  }
+  dd { margin: 0; font-size: 0.95rem; color: var(--ink-soft); }
+  dd :global(strong) { color: var(--ink); font-weight: 600; }
+  .count {
+    display: flex;
+    align-items: baseline;
+    gap: 14px;
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+  .n { font-size: 2.6rem; font-weight: 600; line-height: 1; }
+  .old { color: var(--ink-faint); text-decoration: line-through; text-decoration-thickness: 1.5px; }
+  .new { color: var(--bronze); }
+  .lbl {
+    display: block;
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-top: 6px;
+    font-weight: 500;
+  }
+  @media (max-width: 640px) {
+    .summary { grid-template-columns: 1fr; gap: 18px; }
+    .points div { grid-template-columns: 1fr; gap: 2px; }
+  }
+</style>

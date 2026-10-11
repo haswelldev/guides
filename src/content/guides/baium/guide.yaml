@@ -1,0 +1,7 @@
+title: Baium
+section: epic-raid-bosses
+order: 20
+blurb: The access quest for Baium. Three arks in one loop, then 10 Blooded Fabrics for 10 entries.
+quest:
+  id: 348
+  name: An Arrogant Search

@@ -1,0 +1,7 @@
+title: Antharas
+section: epic-raid-bosses
+order: 10
+blurb: The access quest for Antharas' Lair. Farm every item in one circle, then hand them in on one trip.
+quest:
+  id: 337
+  name: Audience with the Land Dragon

@@ -1,0 +1,14 @@
+---
+import Base from '../layouts/Base.astro';
+import { href } from '../lib/url';
+---
+
+<Base title="Not found · Lineage 2 Guides" description="Page not found.">
+  <header>
+    <h1>
+      Not found
+      <span class="sub">This page does not exist, or it moved.</span>
+    </h1>
+  </header>
+  <p><a href={href()}>Back to all guides</a></p>
+</Base>

@@ -1,0 +1,29 @@
+---
+import ThemeSwitcher from './ThemeSwitcher.astro';
+import ChronicleSelect from './ChronicleSelect.astro';
+import { href } from '../lib/url';
+---
+
+<div class="sitebar">
+  <a class="brand eyebrow" href={href()}>Lineage 2 Guides</a>
+  <div class="controls">
+    <ChronicleSelect />
+    <ThemeSwitcher />
+  </div>
+</div>
+
+<style>
+  .sitebar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px 16px;
+    flex-wrap: wrap;
+    padding-bottom: 14px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: -20px;
+  }
+  .brand { text-decoration: none; }
+  .brand:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .controls { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+</style>

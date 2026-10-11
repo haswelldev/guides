@@ -1,0 +1,58 @@
+---
+const options = ['auto', 'light', 'dark'] as const;
+---
+
+<div class="themer" role="group" aria-label="Colour theme">
+  {
+    options.map((o) => (
+      <button type="button" data-theme-set={o} aria-pressed={o === 'auto' ? 'true' : 'false'}>
+        {o}
+      </button>
+    ))
+  }
+</div>
+
+<script>
+  import { getTheme, setTheme, type Theme } from '../scripts/prefs';
+
+  const buttons = [...document.querySelectorAll<HTMLButtonElement>('.themer button')];
+  const paint = (theme: Theme) =>
+    buttons.forEach((b) => b.setAttribute('aria-pressed', String(b.dataset.themeSet === theme)));
+
+  buttons.forEach((b) =>
+    b.addEventListener('click', () => {
+      const theme = b.dataset.themeSet as Theme;
+      setTheme(theme);
+      paint(theme);
+    }),
+  );
+  paint(getTheme());
+</script>
+
+<style>
+  .themer {
+    display: flex;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius);
+    overflow: hidden;
+    background: var(--panel);
+  }
+  button {
+    font-family: var(--font-mono);
+    font-size: 0.68rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 600;
+    background: none;
+    border: 0;
+    border-right: 1px solid var(--line);
+    color: var(--ink-faint);
+    padding: 5px 10px;
+    cursor: pointer;
+    line-height: 1.4;
+  }
+  button:last-child { border-right: 0; }
+  button:hover { color: var(--ink); }
+  button[aria-pressed='true'] { background: var(--bronze); color: var(--panel); }
+  button:focus-visible { outline-offset: -2px; }
+</style>
