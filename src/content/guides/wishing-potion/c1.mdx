@@ -1,0 +1,160 @@
+---
+title: Wishing Potion Run Sheet
+subtitle: 'The shortest loop to Amulet: Heart of Paagrio'
+description: 'A route for the Lineage 2 C1 quest The Wishing Potion, aimed at Amulet: Heart of Paagrio for Overlords. One loop of eight hunts per potion.'
+eyebrow: Heart of Paagrio
+chronicles: { from: c1, to: c1 }
+testedOn: L2Reborn Legacy
+facts:
+  - { label: Level, value: 30+ }
+  - { label: Start, value: 'Matild, Ivory Tower' }
+  - { label: Goal, value: 'Amulet: Heart of Paagrio' }
+  - { label: Odds, value: About 1 potion in 30 }
+
+summary:
+  points:
+    - { label: Only source, text: '**Amulet: Heart of Paagrio** comes only from the Wisdom wish — about 1 potion in 30.' }
+    - { label: One set, text: 'Each ingredient drops only while you have none of it, so every potion is one full loop.' }
+    - { label: The loop, text: 'Cruma → Windy Hill → Wasteland → Tanor Canyon → Breka''s Stronghold → Gorgon Flower Garden → Ivory Tower.' }
+    - { label: Recipes, text: 'Talk to Matild for new recipes right after each wish — the tree is only for the first potion.' }
+
+phases:
+  - title: Recipes
+    note: only for your first potion
+    stops:
+      - id: matild-start
+        where: Ivory Tower, northeast of the tower
+        who: Alchemist Matild
+        act: talk
+        text:
+          - "Take the quest."
+        get: [Alchemy Text]
+
+      - id: secret-keeper-tree
+        where: Cruma Marshlands, far southwest corner
+        who: Secret Keeper Tree
+        act: hunt
+        text:
+          - "It stands among stone ruins. It is level 47, but it is not aggressive and barely moves. Kill it for the book, then run back to Matild."
+        get: [Secret Book of Potion]
+
+      - id: matild-recipes
+        where: Ivory Tower, northeast of the tower
+        who: Alchemist Matild
+        act: talk
+        text:
+          - "Ingredients drop only while you carry **both recipes**."
+        give: [Secret Book of Potion, Alchemy Text]
+        get: [Potion Recipe 1, Potion Recipe 2]
+
+  - title: Eight ingredients
+    note: one loop per potion, west first, then east
+    stops:
+      - id: cruma
+        where: Cruma Marshlands, western edge
+        who: Horror Mist Ripper
+        act: hunt
+        text:
+          - "They live mostly on the western outskirts of the swamp. Then head west to Windy Hill."
+        get: [Horror Ectoplasm]
+        group: own last hit
+
+      - id: windy-hill
+        where: Windy Hill, near the Orc Barracks
+        who: Whispering Wind
+        act: hunt
+        text:
+          - "The same spot as the first Abyssal Jewel in the Antharas quest. Then head south to the Wasteland."
+        get: [Wind Soulstone]
+        group: own last hit
+
+      - id: wasteland
+        where: The Wasteland & Ant Nest
+        who: Ant Soldier, Ant Warrior Captain, Tyrant & Tyrant Kingpin
+        act: hunt
+        text:
+          - "Two ingredients in one zone: ants for the aphid, tyrants for the chitin. Kill whichever you meet until you have both. Then head east to Tanor Canyon."
+        get: [Ant Soldier Aphid, "Tyrant's Chitin"]
+        group: own last hit
+
+      - id: tanor-canyon
+        where: Tanor Canyon & the shore by Giran Harbor
+        who: Glass Jaguar & Silenos
+        act: hunt
+        text:
+          - "Two ingredients in one area, among the Delu Lizardmen: jaguars for the eye, Silenos for the horn. Kill whichever you meet until you have both. Then go on to Giran and north to Breka's Stronghold."
+        get: [Glass Eye, "Sileno's Horn"]
+        group: own last hit
+
+      - id: brekas-stronghold
+        where: "Around Breka's Stronghold"
+        who: Amber Basilisk
+        act: hunt
+        text:
+          - "Then head southeast to the Gorgon Flower Garden."
+        get: [Amber Scale]
+        group: own last hit
+
+      - id: gorgon-flower-garden
+        where: Gorgon Flower Garden, east of Giran
+        who: Turak Bugbear & Turak Bugbear Warrior
+        act: hunt
+        text:
+          - "Last ingredient. SoE to Giran and travel back to the Ivory Tower."
+        get: [Bugbear Blood]
+        group: own last hit
+
+  - title: The wish
+    note: at Matild, every potion
+    stops:
+      - id: matild-potion
+        where: Ivory Tower, northeast of the tower
+        who: Alchemist Matild
+        act: talk
+        text:
+          - "She brews the potion. The first time she also gives you her orb, so the tree is never needed again."
+        give: [8 ingredients, Potion Recipe 1, Potion Recipe 2]
+        get: [Wish Potion, "Matild's Orb (first time)"]
+
+      - id: matild-wish
+        where: Ivory Tower, northeast of the tower
+        who: Alchemist Matild
+        act: talk
+        text:
+          - "Make the wish at Matild. She takes one wish at a time — if another player is wishing, wait a few seconds. The result comes about 10 seconds later: **Spellbook: Ice Bolt**, **Spellbook: Battle Heal**, or a **Wisdom Chest** next to Matild, 1 in 3 each."
+          - "Talk to the chest: 1 in 10 gives the amulet, 1 in 5 gives both spellbooks, otherwise only advice. Only a player who wished for Wisdom can open it."
+        do:
+          - "Wish for **Wisdom**. Afterwards talk to Matild again for **new recipes** — your next loop starts at Cruma."
+        warn:
+          - "**Talk to the Wisdom Chest within 2 minutes.** Then it disappears, and the wish is wasted."
+        get: ["Amulet: Heart of Paagrio (1 in 30)"]
+
+items:
+  - { item: Secret Book of Potion, from: 'Secret Keeper Tree *(first potion only)*', zone: Cruma Marshlands, to: Matild }
+  - { item: Horror Ectoplasm, from: Horror Mist Ripper, zone: Cruma Marshlands, to: Matild }
+  - { item: Wind Soulstone, from: Whispering Wind, zone: Windy Hill, to: Matild }
+  - { item: Ant Soldier Aphid, from: 'Ant Soldier, Ant Warrior Captain', zone: Wasteland / Ant Nest, to: Matild }
+  - { item: "Tyrant's Chitin", from: 'Tyrant, Tyrant Kingpin', zone: Wasteland / Ant Nest, to: Matild }
+  - { item: Glass Eye, from: Glass Jaguar, zone: Tanor Canyon / Giran Harbor shore, to: Matild }
+  - { item: "Sileno's Horn", from: Silenos, zone: Tanor Canyon / Giran Harbor shore, to: Matild }
+  - { item: Amber Scale, from: Amber Basilisk, zone: "Breka's Stronghold", to: Matild }
+  - { item: Bugbear Blood, from: 'Turak Bugbear, Turak Bugbear Warrior', zone: Gorgon Flower Garden, to: Matild }
+
+sources:
+  - { label: lineage2wiki.org quest 334, url: 'https://lineage2wiki.org/c1/quest/334/the-wishing-potion/' }
+---
+
+<Callout title="A long grind">
+  Every ingredient drops in 1 kill of 10, so one potion is about 80 kills across 6 zones, and the amulet takes about 30 potions on average. Each drop goes to the player with the last hit, so a party only helps you kill faster — every player still needs their own 80 kills per potion.
+</Callout>
+
+<Section title="Before you start" lead="Two things that change the loop.">
+  <Cards>
+    <Card title="Scrolls of Escape">
+      C1 has very few teleports, so you run between zones. Carry several SoE: at least one after Windy Hill and one after the Gorgon Flower Garden.
+    </Card>
+    <Card title="Level 35+">
+      The quest starts at 30, but ants and tyrants are level 35–36 and the Turak Bugbear Warrior is 33. The Secret Keeper Tree is 47 but not aggressive.
+    </Card>
+  </Cards>
+</Section>

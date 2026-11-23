@@ -1,0 +1,7 @@
+title: The Wishing Potion
+section: rare-rewards
+order: 10
+blurb: 'The only source of Amulet: Heart of Paagrio for Overlords. One loop of eight hunts per potion, then wish for Wisdom.'
+quest:
+  id: 334
+  name: The Wishing Potion

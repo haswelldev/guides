@@ -5,6 +5,11 @@ export const sections = [
     title: 'Epic Raid Bosses',
     description: 'Access quests and run sheets for the epic bosses.',
   },
+  {
+    id: 'rare-rewards',
+    title: 'Rare Rewards',
+    description: 'Repeatable quests worth farming for a rare item.',
+  },
 ] as const;
 
 export type SectionId = (typeof sections)[number]['id'];
