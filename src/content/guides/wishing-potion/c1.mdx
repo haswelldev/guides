@@ -15,7 +15,7 @@ summary:
   points:
     - { label: Only source, text: '**Amulet: Heart of Paagrio** comes only from the Wisdom wish — about 1 potion in 30.' }
     - { label: One set, text: 'Each ingredient drops only while you have none of it, so every potion is one full loop.' }
-    - { label: The loop, text: 'Cruma → Windy Hill → Wasteland → Tanor Canyon → Breka''s Stronghold → Gorgon Flower Garden → Ivory Tower.' }
+    - { label: The loop, text: 'Cruma → Windy Hill → Wasteland → Tanor Canyon → Breka''s Stronghold & Gorgon Flower Garden → Ivory Tower.' }
     - { label: Recipes, text: 'Talk to Matild for new recipes right after each wish — the tree is only for the first potion.' }
 
 phases:
@@ -86,22 +86,14 @@ phases:
         get: [Glass Eye, "Sileno's Horn"]
         group: own last hit
 
-      - id: brekas-stronghold
-        where: "Around Breka's Stronghold"
-        who: Amber Basilisk
+      - id: brekas-gorgon
+        where: "Breka's Stronghold & Gorgon Flower Garden"
+        who: Amber Basilisk, Turak Bugbear & Turak Bugbear Warrior
         act: hunt
         text:
-          - "Then head southeast to the Gorgon Flower Garden."
-        get: [Amber Scale]
-        group: own last hit
-
-      - id: gorgon-flower-garden
-        where: Gorgon Flower Garden, east of Giran
-        who: Turak Bugbear & Turak Bugbear Warrior
-        act: hunt
-        text:
-          - "Last ingredient. SoE to Giran and travel back to the Ivory Tower."
-        get: [Bugbear Blood]
+          - "Two ingredients almost next to each other: basilisks around Breka's for the scale, bugbears in the garden for the blood. Kill whichever you meet until you have both."
+          - "Last ingredients. SoE to Giran and travel back to the Ivory Tower."
+        get: [Amber Scale, Bugbear Blood]
         group: own last hit
 
   - title: The wish
@@ -145,7 +137,7 @@ sources:
 ---
 
 <Callout title="A long grind">
-  Every ingredient drops in 1 kill of 10, so one potion is about 80 kills across 6 zones, and the amulet takes about 30 potions on average. Each drop goes to the player with the last hit, so a party only helps you kill faster — every player still needs their own 80 kills per potion.
+  Every ingredient drops in 1 kill of 10, so one potion is about 80 kills across 5 hunting spots, and the amulet takes about 30 potions on average. Each drop goes to the player with the last hit, so a party only helps you kill faster — every player still needs their own 80 kills per potion.
 </Callout>
 
 <Section title="Before you start" lead="Two things that change the loop.">
